@@ -333,6 +333,13 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 @media(max-width:768px){.tg-grid{grid-template-columns:1fr 1fr;gap:12px;}.tg-item img{height:180px;}.tg-item-1,.tg-item-2,.tg-item-3,.tg-item-4{transform:none;}}
 </style>
 </head><body>
+<div id="cyan-burst-overlay" style="position:fixed;inset:0;z-index:99999;background:#08081a;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+<svg id="burst-ring" width="800" height="800" viewBox="0 0 800 800" style="position:absolute;opacity:0;">
+<circle cx="400" cy="400" r="0" fill="none" stroke="#00ffff" stroke-width="4" id="burst-circle-outer"/>
+<circle cx="400" cy="400" r="0" fill="none" stroke="#00ffff" stroke-width="2" id="burst-circle-inner" opacity="0.5"/>
+<circle cx="400" cy="400" r="0" fill="none" stroke="#f200ff" stroke-width="1.5" id="burst-circle-mag" opacity="0.4"/>
+</svg>
+</div>
 <canvas id="canvas3d"></canvas>
 <canvas id="cursor-trail-canvas"></canvas>
 
@@ -357,7 +364,7 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 <section class="hero" id="hero">
 <div class="hc">
 <div class="ey">AI-Powered Digital Infrastructure</div>
-<h1 style="font-family:'Decalotype',sans-serif;font-style:italic;font-size:clamp(32px,5.5vw,64px);line-height:1.3;margin-bottom:20px;"><span class="h-line" style="color:#FF00FF">Stop Hiring. </span><span class="h-line" style="color:#00FFFF">Start Automating!</span></h1>
+<h1 style="font-family:'Decalotype',sans-serif;font-style:italic;font-size:clamp(32px,5.5vw,64px);line-height:1.3;margin-bottom:20px;"><span class="h-line" style="color:#FF00FF">Stop Hiring.</span>&nbsp;&nbsp;<span class="h-line" style="color:#00FFFF">Start Automating!</span></h1>
 <div style="margin-bottom:32px;">
 <p style="font-family:'Decalotype',sans-serif;font-size:clamp(48px,9vw,110px);font-weight:900;font-style:italic;color:#FFFFFF;line-height:1.1;margin:0;text-transform:uppercase;letter-spacing:2px;text-shadow:2px 2px 0 #00cccc,4px 4px 0 #009999,6px 6px 0 #006666,8px 8px 0 #003333">SYSTEMS THAT MAKE</p>
 <p style="font-family:'Decalotype',sans-serif;font-size:clamp(48px,9vw,110px);font-weight:900;font-style:italic;color:#FFFFFF;line-height:1.1;margin:0;text-transform:uppercase;letter-spacing:2px;text-shadow:2px 2px 0 #00cccc,4px 4px 0 #009999,6px 6px 0 #006666,8px 8px 0 #003333"><span>CLIENTS SAY </span><span id="yes-text" style="font-family:'Amsterdam Four',cursive;font-style:normal;color:#FF00FF;cursor:pointer;position:relative;text-shadow:none;text-transform:none">Yes!</span></p>
@@ -822,15 +829,39 @@ CustomEase.create("hello-bounce","0.34,1.56,0.64,1");
 // ScrollSmoother
 var smoother=ScrollSmoother.create({wrapper:'#smooth-wrapper',content:'#smooth-content',smooth:1.2,effects:true,smoothTouch:0.1});
 
+// ========== CYAN BURST GATEWAY INTRO ==========
+(function(){
+var overlay=document.getElementById('cyan-burst-overlay');
+var ring=document.getElementById('burst-ring');
+var outerC=document.getElementById('burst-circle-outer');
+var innerC=document.getElementById('burst-circle-inner');
+var magC=document.getElementById('burst-circle-mag');
+var hc=document.querySelector('.hc');
+// Hide hero content initially
+gsap.set(hc,{opacity:0});
+
+var burstTL=gsap.timeline();
+// Fade in ring SVG
+burstTL.to(ring,{opacity:1,duration:0.2})
+// Expand rings outward — the "gateway opening"
+.to(outerC,{attr:{r:380,'stroke-width':6},duration:1.8,ease:'power2.out'},0.1)
+.to(innerC,{attr:{r:340,'stroke-width':3},opacity:0.7,duration:1.6,ease:'power2.out'},0.2)
+.to(magC,{attr:{r:300,'stroke-width':2.5},opacity:0.6,duration:1.4,ease:'power2.out'},0.3)
+// At 2/3 mark (~1.2s) — hero text pops through the gateway
+.call(function(){
+gsap.to(hc,{opacity:1,duration:0.01});
 // SplitText hero with custom ease
 var sp1=SplitText.create('.h-line',{type:'chars',charsClass:'sc'});
-gsap.from(sp1.chars,{y:60,opacity:0,rotationX:40,stagger:0.03,duration:0.7,delay:0.4,ease:'hello-bounce'});
-gsap.from('.ey',{y:20,opacity:0,duration:0.6,delay:0.2,ease:'hello-snap'});
-gsap.from('.tl',{y:30,opacity:0,duration:0.7,delay:0.8,ease:'hello-snap'});
-gsap.from('.hctas',{y:20,opacity:0,duration:0.6,delay:1,ease:'hello-snap'});
-
-// TextPlugin - typed effect on the hero tagline
-gsap.fromTo('.hc .ey',{text:{value:''}},{text:{value:'AI-Powered Digital Infrastructure'},duration:1.5,delay:0.1,ease:'none'});
+gsap.from(sp1.chars,{y:60,opacity:0,rotationX:40,stagger:0.03,duration:0.7,ease:'hello-bounce'});
+gsap.from('.ey',{y:20,opacity:0,duration:0.6,ease:'hello-snap'});
+gsap.fromTo('.hc .ey',{text:{value:''}},{text:{value:'AI-Powered Digital Infrastructure'},duration:1.5,ease:'none'});
+gsap.from('.hctas',{y:20,opacity:0,duration:0.6,delay:0.6,ease:'hello-snap'});
+},null,1.2)
+// Flash and dissolve the gateway
+.to([outerC,innerC,magC],{'stroke-width':30,opacity:0,duration:0.6,ease:'power2.in',stagger:0.05},1.6)
+.to(overlay,{opacity:0,duration:0.5,ease:'power2.inOut'},1.8)
+.call(function(){overlay.style.display='none';},null,2.4);
+})();
 
 // SplitText section headings
 document.querySelectorAll('.split-h').forEach(function(el){
@@ -1106,94 +1137,103 @@ gsap.to(orb,{motionPath:{path:[{x:Math.random()*400-200,y:Math.random()*200-100}
 })();
 </script>
 <script>
-// ========== THREE.JS 3D PARTICLE BACKGROUND ==========
+// ========== GSAP CANVAS PARTICLE BACKGROUND — tech / futuristic ==========
 (function(){
 var canvas=document.getElementById('canvas3d');
-var renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true});
-renderer.setSize(window.innerWidth,window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+var ctx=canvas.getContext('2d');
+var W,H;
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+resize();
+window.addEventListener('resize',resize);
 
-var scene=new THREE.Scene();
-var camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,1,5000);
-camera.position.set(0,0,600);
+var colors=['#00ffff','#f200ff','#f2ff00','#ffffff','#00cccc','#c000cc','#d4e600'];
+// Shape types: 0=circle, 1=hexagon, 2=triangle, 3=diamond, 4=square, 5=plus/cross, 6=ring
+var SHAPE_COUNT=7;
+var particles=[];
+var COUNT=120;
 
-// Helper: create particle system
-function makeParticles(count,color,sizeBase,spread,speedRange){
-var geo=new THREE.BufferGeometry();
-var pos=new Float32Array(count*3);
-var vel=[];
-for(var i=0;i<count;i++){
-pos[i*3]=(Math.random()-0.5)*spread;
-pos[i*3+1]=(Math.random()-0.5)*spread*0.7;
-pos[i*3+2]=(Math.random()-0.5)*spread;
-vel.push({
-x:(Math.random()-0.5)*speedRange*2,
-y:(Math.random()-0.5)*speedRange*1.5,
-z:(Math.random()-0.5)*speedRange*2
-});
+function createParticle(){
+var sz=1+Math.random()*5;
+return {
+x:Math.random()*W,
+y:Math.random()*H,
+size:sz,
+shape:Math.floor(Math.random()*SHAPE_COUNT),
+color:colors[Math.floor(Math.random()*colors.length)],
+alpha:0.15+Math.random()*0.45,
+vx:(Math.random()-0.5)*0.4,
+vy:(Math.random()-0.5)*0.3,
+rot:Math.random()*Math.PI*2,
+vr:(Math.random()-0.5)*0.01,
+pulse:Math.random()*Math.PI*2
+};
 }
-geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
-var mat=new THREE.PointsMaterial({color:color,size:sizeBase,transparent:true,opacity:0.5,blending:THREE.AdditiveBlending,sizeAttenuation:true});
-return {geo:geo,mat:mat,mesh:new THREE.Points(geo,mat),vel:vel,count:count,spread:spread};
+for(var i=0;i<COUNT;i++) particles.push(createParticle());
+
+function drawShape(p){
+ctx.save();
+ctx.translate(p.x,p.y);
+ctx.rotate(p.rot);
+ctx.globalAlpha=p.alpha*(0.7+0.3*Math.sin(p.pulse));
+ctx.fillStyle=p.color;
+ctx.strokeStyle=p.color;
+ctx.lineWidth=0.8;
+var s=p.size;
+switch(p.shape){
+case 0:// circle
+ctx.beginPath();ctx.arc(0,0,s,0,Math.PI*2);ctx.fill();break;
+case 1:// hexagon
+ctx.beginPath();for(var j=0;j<6;j++){var a=Math.PI/3*j-Math.PI/6;ctx.lineTo(Math.cos(a)*s,Math.sin(a)*s);}ctx.closePath();ctx.fill();break;
+case 2:// triangle
+ctx.beginPath();ctx.moveTo(0,-s);ctx.lineTo(s*0.87,s*0.5);ctx.lineTo(-s*0.87,s*0.5);ctx.closePath();ctx.fill();break;
+case 3:// diamond
+ctx.beginPath();ctx.moveTo(0,-s);ctx.lineTo(s*0.6,0);ctx.lineTo(0,s);ctx.lineTo(-s*0.6,0);ctx.closePath();ctx.fill();break;
+case 4:// square
+ctx.fillRect(-s*0.7,-s*0.7,s*1.4,s*1.4);break;
+case 5:// plus / cross
+ctx.fillRect(-s*0.2,-s,s*0.4,s*2);ctx.fillRect(-s,-s*0.2,s*2,s*0.4);break;
+case 6:// ring (circuit node)
+ctx.beginPath();ctx.arc(0,0,s,0,Math.PI*2);ctx.stroke();
+ctx.beginPath();ctx.arc(0,0,s*0.3,0,Math.PI*2);ctx.fill();break;
+}
+ctx.restore();
 }
 
-// Create three particle systems
-var cyan=makeParticles(1000,0x00ffff,2.8,3000,1.8);
-var mag=makeParticles(800,0xf200ff,2.2,2800,1.5);
-var yel=makeParticles(500,0xf2ff00,2.0,2600,1.2);
-
-scene.add(cyan.mesh);
-scene.add(mag.mesh);
-scene.add(yel.mesh);
-
-function updateParticles(p,time,phaseOffset){
-var arr=p.geo.attributes.position.array;
-var half=p.spread*0.5;
-for(var i=0;i<p.count;i++){
-var i3=i*3;
-// Add drift + sine wave wobble for organic motion
-arr[i3]+=p.vel[i].x+Math.sin(time*0.8+i*0.1)*0.3;
-arr[i3+1]+=p.vel[i].y+Math.cos(time*0.6+i*0.15)*0.25;
-arr[i3+2]+=p.vel[i].z+Math.sin(time*0.7+i*0.12)*0.2;
-
-// Wrap around instead of bounce - creates fly-through effect
-if(arr[i3]>half){arr[i3]=-half;} else if(arr[i3]<-half){arr[i3]=half;}
-if(arr[i3+1]>half*0.7){arr[i3+1]=-half*0.7;} else if(arr[i3+1]<-half*0.7){arr[i3+1]=half*0.7;}
-if(arr[i3+2]>half){arr[i3+2]=-half;} else if(arr[i3+2]<-half){arr[i3+2]=half;}
+// Draw faint connection lines between nearby particles
+function drawConnections(){
+ctx.lineWidth=0.5;
+for(var i=0;i<particles.length;i++){
+for(var j=i+1;j<particles.length;j++){
+var dx=particles[i].x-particles[j].x;
+var dy=particles[i].y-particles[j].y;
+var dist=dx*dx+dy*dy;
+if(dist<18000){
+var a=0.08*(1-dist/18000);
+ctx.globalAlpha=a;
+ctx.strokeStyle=particles[i].color;
+ctx.beginPath();
+ctx.moveTo(particles[i].x,particles[i].y);
+ctx.lineTo(particles[j].x,particles[j].y);
+ctx.stroke();
 }
-p.geo.attributes.position.needsUpdate=true;
-// Pulse opacity
-p.mat.opacity=0.35+Math.sin(time*0.5+phaseOffset)*0.15;
+}
+}
 }
 
-// ---- ANIMATE ----
-var clock=new THREE.Clock();
 function animate(){
 requestAnimationFrame(animate);
-var t=clock.getElapsedTime();
-
-// Slowly rotate each system for added depth
-cyan.mesh.rotation.y=t*0.015;
-cyan.mesh.rotation.x=Math.sin(t*0.008)*0.05;
-mag.mesh.rotation.y=-t*0.012;
-mag.mesh.rotation.z=t*0.008;
-yel.mesh.rotation.y=t*0.01;
-yel.mesh.rotation.x=-t*0.006;
-
-// Update individual particle positions
-updateParticles(cyan,t,0);
-updateParticles(mag,t,2);
-updateParticles(yel,t,4);
-
-renderer.render(scene,camera);
+ctx.clearRect(0,0,W,H);
+drawConnections();
+for(var i=0;i<particles.length;i++){
+var p=particles[i];
+p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;p.pulse+=0.02;
+// Wrap around edges
+if(p.x<-10)p.x=W+10;if(p.x>W+10)p.x=-10;
+if(p.y<-10)p.y=H+10;if(p.y>H+10)p.y=-10;
+drawShape(p);
+}
 }
 animate();
-
-window.addEventListener('resize',function(){
-camera.aspect=window.innerWidth/window.innerHeight;
-camera.updateProjectionMatrix();
-renderer.setSize(window.innerWidth,window.innerHeight);
-});
 })();
 </script>
 <script>
