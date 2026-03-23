@@ -333,13 +333,6 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 @media(max-width:768px){.tg-grid{grid-template-columns:1fr 1fr;gap:12px;}.tg-item img{height:180px;}.tg-item-1,.tg-item-2,.tg-item-3,.tg-item-4{transform:none;}}
 </style>
 </head><body>
-<div id="cyan-burst-overlay" style="position:fixed;inset:0;z-index:99999;background:#08081a;display:flex;align-items:center;justify-content:center;pointer-events:none;">
-<svg id="burst-ring" width="800" height="800" viewBox="0 0 800 800" style="position:absolute;opacity:0;">
-<circle cx="400" cy="400" r="0" fill="none" stroke="#00ffff" stroke-width="4" id="burst-circle-outer"/>
-<circle cx="400" cy="400" r="0" fill="none" stroke="#00ffff" stroke-width="2" id="burst-circle-inner" opacity="0.5"/>
-<circle cx="400" cy="400" r="0" fill="none" stroke="#f200ff" stroke-width="1.5" id="burst-circle-mag" opacity="0.4"/>
-</svg>
-</div>
 <canvas id="canvas3d"></canvas>
 <canvas id="cursor-trail-canvas"></canvas>
 
@@ -829,39 +822,15 @@ CustomEase.create("hello-bounce","0.34,1.56,0.64,1");
 // ScrollSmoother
 var smoother=ScrollSmoother.create({wrapper:'#smooth-wrapper',content:'#smooth-content',smooth:1.2,effects:true,smoothTouch:0.1});
 
-// ========== CYAN BURST GATEWAY INTRO ==========
-(function(){
-var overlay=document.getElementById('cyan-burst-overlay');
-var ring=document.getElementById('burst-ring');
-var outerC=document.getElementById('burst-circle-outer');
-var innerC=document.getElementById('burst-circle-inner');
-var magC=document.getElementById('burst-circle-mag');
-var hc=document.querySelector('.hc');
-// Hide hero content initially
-gsap.set(hc,{opacity:0});
-
-var burstTL=gsap.timeline();
-// Fade in ring SVG
-burstTL.to(ring,{opacity:1,duration:0.2})
-// Expand rings outward — the "gateway opening"
-.to(outerC,{attr:{r:380,'stroke-width':6},duration:1.8,ease:'power2.out'},0.1)
-.to(innerC,{attr:{r:340,'stroke-width':3},opacity:0.7,duration:1.6,ease:'power2.out'},0.2)
-.to(magC,{attr:{r:300,'stroke-width':2.5},opacity:0.6,duration:1.4,ease:'power2.out'},0.3)
-// At 2/3 mark (~1.2s) — hero text pops through the gateway
-.call(function(){
-gsap.to(hc,{opacity:1,duration:0.01});
 // SplitText hero with custom ease
 var sp1=SplitText.create('.h-line',{type:'chars',charsClass:'sc'});
-gsap.from(sp1.chars,{y:60,opacity:0,rotationX:40,stagger:0.03,duration:0.7,ease:'hello-bounce'});
-gsap.from('.ey',{y:20,opacity:0,duration:0.6,ease:'hello-snap'});
-gsap.fromTo('.hc .ey',{text:{value:''}},{text:{value:'AI-Powered Digital Infrastructure'},duration:1.5,ease:'none'});
-gsap.from('.hctas',{y:20,opacity:0,duration:0.6,delay:0.6,ease:'hello-snap'});
-},null,1.2)
-// Flash and dissolve the gateway
-.to([outerC,innerC,magC],{'stroke-width':30,opacity:0,duration:0.6,ease:'power2.in',stagger:0.05},1.6)
-.to(overlay,{opacity:0,duration:0.5,ease:'power2.inOut'},1.8)
-.call(function(){overlay.style.display='none';},null,2.4);
-})();
+gsap.from(sp1.chars,{y:60,opacity:0,rotationX:40,stagger:0.03,duration:0.7,delay:0.4,ease:'hello-bounce'});
+gsap.from('.ey',{y:20,opacity:0,duration:0.6,delay:0.2,ease:'hello-snap'});
+gsap.from('.tl',{y:30,opacity:0,duration:0.7,delay:0.8,ease:'hello-snap'});
+gsap.from('.hctas',{y:20,opacity:0,duration:0.6,delay:1,ease:'hello-snap'});
+
+// TextPlugin - typed effect on the hero tagline
+gsap.fromTo('.hc .ey',{text:{value:''}},{text:{value:'AI-Powered Digital Infrastructure'},duration:1.5,delay:0.1,ease:'none'});
 
 // SplitText section headings
 document.querySelectorAll('.split-h').forEach(function(el){
