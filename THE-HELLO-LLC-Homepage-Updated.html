@@ -86,7 +86,7 @@ nav.solid{background:rgba(8,8,26,.96);box-shadow:0 4px 30px rgba(0,0,0,.5);}
 .metrics-hero-card{padding:48px 44px;border-radius:32px;background:linear-gradient(145deg,rgba(0,255,255,.06),rgba(242,0,255,.04));border:2px solid rgba(0,255,255,.1);position:relative;overflow:hidden;}
 .metrics-hero-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(0,255,255,.08),transparent 70%);pointer-events:none;}
 .metrics-hero-card::after{content:'';position:absolute;bottom:-40px;left:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(242,0,255,.06),transparent 70%);pointer-events:none;}
-.metrics-hero-val{font-size:clamp(56px,10vw,110px);font-weight:900;background:linear-gradient(135deg,var(--cy),var(--mag),var(--yel));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin:0 0 12px;}
+.metrics-hero-val{font-size:clamp(56px,10vw,110px);font-weight:900;color:var(--cy);line-height:1;margin:0 0 12px;}
 .metrics-hero-label{font-size:14px;color:var(--g4);line-height:1.5;max-width:400px;}
 .metrics-side{display:flex;flex-direction:column;gap:20px;}
 .metric-pill{display:flex;align-items:center;gap:20px;padding:28px 32px;border-radius:20px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);transition:all .4s cubic-bezier(.34,1.56,.64,1);position:relative;overflow:hidden;}
@@ -161,7 +161,7 @@ nav.solid{background:rgba(8,8,26,.96);box-shadow:0 4px 30px rgba(0,0,0,.5);}
 .pod-art-badge{position:absolute;top:20px;left:20px;padding:8px 18px;border-radius:40px;background:rgba(8,8,26,.7);backdrop-filter:blur(10px);border:1px solid rgba(0,255,255,.2);font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--cy);}
 .pod-content{padding:48px 40px;display:flex;flex-direction:column;justify-content:center;}
 .pod-content .pod-tag{font-size:11px;font-weight:800;letter-spacing:5px;text-transform:uppercase;color:var(--mag);margin-bottom:12px;}
-.pod-content h3{font-size:clamp(28px,3.5vw,42px);font-weight:900;line-height:1.1;margin-bottom:12px;background:linear-gradient(135deg,var(--cy),var(--mag));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.pod-content h3{font-size:clamp(28px,3.5vw,42px);font-weight:900;line-height:1.1;margin-bottom:12px;color:var(--cy);}
 .pod-content .pod-sub{font-size:14px;color:var(--g4);line-height:1.65;margin-bottom:28px;}
 .pod-player{border-radius:16px;overflow:hidden;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.04);}
 .pod-links{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;}
@@ -203,9 +203,15 @@ nav.solid{background:rgba(8,8,26,.96);box-shadow:0 4px 30px rgba(0,0,0,.5);}
 #cursor-trail-canvas{position:fixed;inset:0;z-index:99998;pointer-events:none;}
 /* HORIZONTAL SCROLL */
 .horizontal-scroll-wrap{overflow:hidden;position:relative;}
-.horizontal-scroll-track{display:flex;gap:0;width:max-content;}
-.horizontal-scroll-track .svc-card{min-width:80vw;flex-shrink:0;}
-@media(max-width:768px){.horizontal-scroll-track .svc-card{min-width:95vw;}}
+.horizontal-scroll-track{display:flex;gap:24px;width:max-content;padding:0 40px;}
+.horizontal-scroll-track .svc-card{min-width:70vw;max-width:900px;flex-shrink:0;grid-template-columns:1fr;border-radius:32px;overflow:hidden;position:relative;min-height:500px;}
+.horizontal-scroll-track .svc-card .svc-img-wrap{position:absolute;inset:0;min-height:100%;z-index:0;}
+.horizontal-scroll-track .svc-card .svc-img-wrap img{width:100%;height:100%;object-fit:cover;filter:brightness(0.4);}
+.horizontal-scroll-track .svc-card .svc-content{position:relative;z-index:2;padding:60px 48px;display:flex;flex-direction:column;justify-content:flex-end;min-height:500px;}
+.horizontal-scroll-track .svc-card .svc-content h3{font-size:clamp(32px,4vw,52px);color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.5);}
+.horizontal-scroll-track .svc-card .svc-content p{font-size:16px;color:rgba(255,255,255,.85);max-width:500px;}
+.horizontal-scroll-track .svc-card .svc-number{position:absolute;top:30px;right:36px;font-size:120px;color:rgba(255,255,255,.08);z-index:1;}
+@media(max-width:768px){.horizontal-scroll-track .svc-card{min-width:90vw;min-height:400px;}.horizontal-scroll-track .svc-card .svc-content{min-height:400px;padding:40px 28px;}}
 /* INFINITE CARD SLIDER */
 .metrics-slider-wrap{overflow:hidden;position:relative;padding:20px 0;}
 .metrics-slider-track{display:flex;gap:20px;width:max-content;}
@@ -301,7 +307,7 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 .svc-content h3{font-size:clamp(24px,3vw,36px);font-weight:900;line-height:1.1;margin-bottom:16px;color:#fff;}
 .svc-content p{font-size:14px;color:var(--g4);line-height:1.65;margin-bottom:24px;}
 .svc-stat{display:flex;align-items:baseline;gap:10px;padding-top:16px;border-top:1px solid rgba(255,255,255,.06);}
-.svc-stat-val{font-size:28px;font-weight:900;background:linear-gradient(135deg,var(--cy),var(--mag));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.svc-stat-val{font-size:28px;font-weight:900;color:var(--cy);}
 .svc-stat-label{font-size:12px;color:var(--g6);text-transform:uppercase;letter-spacing:2px;}
 .svc-card-1 .svc-img-wrap{border-radius:24px 0 0 24px;}
 .svc-card-2 .svc-img-wrap{border-radius:0 24px 24px 0;}
@@ -319,7 +325,7 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 /* TRUST GALLERY */
 .tg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;perspective:1200px;}
 .tg-item{position:relative;border-radius:18px;overflow:hidden;cursor:pointer;transition:all .5s cubic-bezier(.34,1.56,.64,1);border:2px solid transparent;}
-.tg-item img{width:100%;height:280px;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.34,1.56,.64,1),filter .4s;}
+.tg-item img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.34,1.56,.64,1),filter .4s;}
 .tg-item:hover img{transform:scale(1.08);filter:brightness(1.1);}
 .tg-item:hover{border-color:var(--cy);box-shadow:0 20px 60px rgba(0,255,255,.15),0 0 30px rgba(0,255,255,.08);}
 .tg-overlay{position:absolute;bottom:0;left:0;right:0;padding:16px 20px;background:linear-gradient(transparent,rgba(8,8,26,.9));transform:translateY(100%);transition:transform .4s cubic-bezier(.34,1.56,.64,1);}
@@ -330,7 +336,7 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 .tg-item-3{transform:rotate(-1deg) translateY(16px);}
 .tg-item-4{transform:rotate(2deg) translateY(-4px);}
 .tg-item-1:hover,.tg-item-2:hover,.tg-item-3:hover,.tg-item-4:hover{transform:rotate(0deg) translateY(-8px) scale(1.03);}
-@media(max-width:768px){.tg-grid{grid-template-columns:1fr 1fr;gap:12px;}.tg-item img{height:180px;}.tg-item-1,.tg-item-2,.tg-item-3,.tg-item-4{transform:none;}}
+@media(max-width:768px){.tg-grid{grid-template-columns:1fr 1fr;gap:12px;}.tg-item img{aspect-ratio:16/9;}.tg-item-1,.tg-item-2,.tg-item-3,.tg-item-4{transform:none;}}
 </style>
 </head><body>
 <canvas id="canvas3d"></canvas>
@@ -368,8 +374,8 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 
 <!-- WHAT WE DO -->
 <section style="background:#00cccc;padding:100px 40px;text-align:center;position:relative;z-index:1;">
-<span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:11px;letter-spacing:6px;color:#00cccc;font-weight:700;text-transform:uppercase;display:block;margin-bottom:40px;">WHAT WE DO</span>
-<p style="font-family:'Decalotype',sans-serif;font-size:clamp(36px,7.5vw,88px);font-weight:900;font-style:italic;color:#0a1a3a;line-height:1.05;margin:0 auto;max-width:1200px;text-transform:uppercase;letter-spacing:1px;text-shadow:0 0 20px rgba(0,255,255,0.3),0 0 40px rgba(0,255,255,0.15);">WE IMPLEMENT SMART SYSTEMS THAT TURN CONVERSATIONS INTO <span style="font-family:'Amsterdam Four',cursive;font-style:normal;color:#FF00FF;text-shadow:none;text-transform:none;">&ldquo;Yes&rdquo;</span> FOR YOUR COMPANY.</p>
+<span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:11px;letter-spacing:6px;color:#0a1a3a;font-weight:700;text-transform:uppercase;display:block;margin-bottom:40px;">WHAT WE DO</span>
+<p style="font-family:'Decalotype',sans-serif;font-size:clamp(36px,7.5vw,88px);font-weight:900;font-style:italic;color:#0a1a3a;line-height:1.05;margin:0 auto;max-width:1200px;text-transform:uppercase;letter-spacing:1px;">WE IMPLEMENT SMART SYSTEMS THAT TURN CONVERSATIONS INTO <span style="font-family:'Amsterdam Four',cursive;font-style:normal;color:#FF00FF;text-transform:none;">&ldquo;Yes&rdquo;</span> FOR YOUR COMPANY.</p>
 </section>
 
 
@@ -389,23 +395,20 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 
 <!-- VIDEO SHOWCASE -->
 <section class="sec" style="text-align:center;padding:60px 20px 80px">
-<span class="tag" style="color:var(--mag)">Watch</span>
-<h2 class="sh split-h" style="font-size:clamp(28px,5vw,48px);margin-bottom:32px">AI for Brands: Chaos to Clarity</h2>
-<div class="video-showcase" style="max-width:400px;margin:0 auto;position:relative">
-<div style="position:relative;border-radius:24px;overflow:hidden;border:2px solid rgba(242,0,255,.15);box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 60px rgba(242,0,255,.08);aspect-ratio:9/16">
-<iframe width="100%" height="100%" src="https://www.youtube.com/embed/ocUObgr_FiE?si=i31WjbPQztOn1fkI" title="AI for Brands: Chaos to Clarity with The Hello LLC" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%"></iframe>
+<div class="video-showcase" style="max-width:960px;margin:0 auto;position:relative">
+<div style="position:relative;border-radius:24px;overflow:hidden;border:2px solid rgba(0,255,255,.15);box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 60px rgba(0,255,255,.08);aspect-ratio:16/9">
+<video id="hero-video" width="100%" height="100%" muted playsinline preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+<source src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69c001105596d15c8bf7a8ec.mp4" type="video/mp4">
+</video>
 </div>
-<div style="position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--mag),var(--cy));opacity:.15;filter:blur(20px);pointer-events:none"></div>
-<div style="position:absolute;bottom:-20px;left:-20px;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--yel),var(--mag));opacity:.15;filter:blur(20px);pointer-events:none"></div>
 </div>
 </section>
 
 <!-- SERVICES -->
 <section class="sec" id="services">
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:40px">
-<div><span class="tag" style="color:var(--cy)">What We Build</span>
-<h2 class="sh split-h" style="font-size:clamp(32px,5vw,56px);line-height:1.05">Digital infrastructure for modern business</h2></div>
-<div><p style="color:var(--g4);font-size:16px;line-height:1.6">Automate, optimize, and scale with AI-driven systems designed for efficiency.</p></div>
+<div style="text-align:center;margin-bottom:40px">
+<span class="tag" style="color:var(--cy)">What We Build</span>
+<h2 class="sh split-h" style="font-size:clamp(32px,5vw,56px);line-height:1.05">Smart Systems that Work</h2>
 </div>
 <div class="svc-showcase horizontal-scroll-wrap"><div class="horizontal-scroll-track">
 <div class="svc-card svc-card-1">
@@ -435,6 +438,15 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 <div class="svc-stat"><span class="svc-stat-val">71%</span><span class="svc-stat-label">Increased Visibility</span></div>
 </div>
 </div>
+<div class="svc-card svc-card-4" style="border-color:rgba(0,255,255,.08)">
+<div class="svc-img-wrap" style="background:linear-gradient(135deg,#0a1628,#1a1040);"><div class="svc-number">04</div></div>
+<div class="svc-content">
+<div class="svc-tag" style="color:var(--cy)">&#9632; BUSINESS SERVICES</div>
+<h3>Full-Service Support<br>Built to Scale</h3>
+<p>Strategy sessions, system audits, tech stack consulting, and ongoing optimization. We handle the infrastructure so you focus on growth.</p>
+<div class="svc-stat"><span class="svc-stat-val">100%</span><span class="svc-stat-label">Hands-Off Operation</span></div>
+</div>
+</div>
 </div>
 </section>
 
@@ -443,27 +455,54 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 <span class="tag" style="color:var(--cy)">Performance at a Glance</span>
 <h2 class="sh split-h" style="font-size:clamp(28px,5vw,52px);font-weight:900">Metrics That Matter Most</h2>
 
-<!-- HERO CARD + SIDE CARDS -->
-<div class="metrics-grid" style="margin-top:40px">
-<div class="metrics-hero-card">
-<div class="metrics-hero-val">$23,500+</div>
-<p style="font-size:18px;font-weight:700;color:#fff;margin-bottom:4px">SAVED</p>
-<p class="metrics-hero-label">Per role. Year one. Compared to hiring a $50K employee.</p>
+<!-- GSAP FLIP CAROUSEL - METRICS -->
+<div class="flip-carousel" style="margin-top:40px;position:relative;max-width:800px;margin-left:auto;margin-right:auto;min-height:360px;perspective:1200px">
+<div class="flip-card" data-active="true" style="position:absolute;inset:0;padding:48px 44px;border-radius:32px;background:linear-gradient(145deg,rgba(0,255,255,.08),rgba(242,0,255,.04));border:2px solid rgba(0,255,255,.15);backface-visibility:hidden;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center">
+<div style="font-size:64px;margin-bottom:12px">&#128176;</div>
+<div style="font-size:clamp(56px,10vw,110px);font-weight:900;color:var(--cy);line-height:1">$23,500+</div>
+<p style="font-size:18px;font-weight:700;color:#fff;margin:8px 0 4px">SAVED</p>
+<p style="font-size:14px;color:var(--g4)">Per role. Year one. Compared to hiring a $50K employee.</p>
 </div>
-<div class="metrics-side">
-<div class="metric-pill"><div class="mp-icon">&#9889;</div><div><div class="mp-val">24/7</div><div class="mp-label">Operations</div></div></div>
-<div class="metric-pill"><div class="mp-icon">&#10060;</div><div><div class="mp-val">0%</div><div class="mp-label">Turnover</div></div></div>
-<div class="metric-pill" style="border-color:rgba(242,255,0,.08)"><div class="mp-icon" style="background:linear-gradient(135deg,rgba(242,255,0,.15),rgba(242,255,0,.05));color:var(--yel)">&#9889;</div><div><div class="mp-val" style="color:var(--yel)">3&ndash;5x</div><div class="mp-label">Faster Execution</div></div></div>
-<div class="metric-pill" style="border-color:rgba(0,255,255,.08)"><div class="mp-icon" style="background:linear-gradient(135deg,rgba(0,255,255,.15),rgba(0,255,255,.05));color:var(--cy)">&#128176;</div><div><div class="mp-val" style="color:var(--cy)">50%+</div><div class="mp-label">Cost Reduction</div></div></div>
+<div class="flip-card" style="position:absolute;inset:0;padding:48px 44px;border-radius:32px;background:linear-gradient(145deg,rgba(242,0,255,.08),rgba(0,255,255,.04));border:2px solid rgba(242,0,255,.15);backface-visibility:hidden;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0">
+<div style="font-size:64px;margin-bottom:12px">&#9889;</div>
+<div style="font-size:clamp(56px,10vw,110px);font-weight:900;color:var(--cy);line-height:1">24/7</div>
+<p style="font-size:18px;font-weight:700;color:#fff;margin:8px 0 4px">OPERATIONS</p>
+<p style="font-size:14px;color:var(--g4)">No clock-ins. No downtime. Always-on automation.</p>
+</div>
+<div class="flip-card" style="position:absolute;inset:0;padding:48px 44px;border-radius:32px;background:linear-gradient(145deg,rgba(242,255,0,.08),rgba(0,255,255,.04));border:2px solid rgba(242,255,0,.15);backface-visibility:hidden;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0">
+<div style="font-size:64px;margin-bottom:12px">&#10060;</div>
+<div style="font-size:clamp(56px,10vw,110px);font-weight:900;color:var(--cy);line-height:1">0%</div>
+<p style="font-size:18px;font-weight:700;color:#fff;margin:8px 0 4px">TURNOVER</p>
+<p style="font-size:14px;color:var(--g4)">No rehiring. No retraining. Zero risk.</p>
+</div>
+<div class="flip-card" style="position:absolute;inset:0;padding:48px 44px;border-radius:32px;background:linear-gradient(145deg,rgba(0,255,255,.08),rgba(242,255,0,.04));border:2px solid rgba(0,255,255,.15);backface-visibility:hidden;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0">
+<div style="font-size:64px;margin-bottom:12px">&#9201;</div>
+<div style="font-size:clamp(56px,10vw,110px);font-weight:900;color:var(--cy);line-height:1">3&ndash;5x</div>
+<p style="font-size:18px;font-weight:700;color:#fff;margin:8px 0 4px">FASTER EXECUTION</p>
+<p style="font-size:14px;color:var(--g4)">AI vs human delays. Instant processing.</p>
+</div>
+<div class="flip-card" style="position:absolute;inset:0;padding:48px 44px;border-radius:32px;background:linear-gradient(145deg,rgba(242,0,255,.08),rgba(242,255,0,.04));border:2px solid rgba(242,0,255,.15);backface-visibility:hidden;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0">
+<div style="font-size:64px;margin-bottom:12px">&#128200;</div>
+<div style="font-size:clamp(56px,10vw,110px);font-weight:900;color:var(--cy);line-height:1">50%+</div>
+<p style="font-size:18px;font-weight:700;color:#fff;margin:8px 0 4px">COST REDUCTION</p>
+<p style="font-size:14px;color:var(--g4)">Without sacrificing output quality.</p>
+</div>
+<!-- Flip carousel nav dots -->
+<div class="flip-dots" style="position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);display:flex;gap:10px">
+<button class="flip-dot active" data-index="0" style="width:12px;height:12px;border-radius:50%;background:var(--cy);border:none;cursor:pointer;transition:all .3s"></button>
+<button class="flip-dot" data-index="1" style="width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.2);border:none;cursor:pointer;transition:all .3s"></button>
+<button class="flip-dot" data-index="2" style="width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.2);border:none;cursor:pointer;transition:all .3s"></button>
+<button class="flip-dot" data-index="3" style="width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.2);border:none;cursor:pointer;transition:all .3s"></button>
+<button class="flip-dot" data-index="4" style="width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.2);border:none;cursor:pointer;transition:all .3s"></button>
 </div>
 </div>
 
 <!-- INFINITE CARD SLIDER - ALL METRICS -->
 <div class="metrics-slider-wrap" style="margin-top:48px">
 <div class="metrics-slider-track">
-<div class="metric-slide-card" style="border-color:rgba(242,0,255,.1)"><div style="font-size:32px;margin-bottom:8px">&#128995;</div><div style="font-size:36px;font-weight:900;background:linear-gradient(135deg,var(--mag),var(--cy));-webkit-background-clip:text;-webkit-text-fill-color:transparent">$23,500+</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">First-Year Savings</div><div style="font-size:12px;color:var(--g6)">Per role vs $50K hire</div></div>
-<div class="metric-slide-card" style="border-color:rgba(0,255,255,.1)"><div style="font-size:32px;margin-bottom:8px">&#128309;</div><div style="font-size:36px;font-weight:900;background:linear-gradient(135deg,var(--cy),var(--yel));-webkit-background-clip:text;-webkit-text-fill-color:transparent">$32,000+</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Annual Savings Y2+</div><div style="font-size:12px;color:var(--g6)">Zero overhead</div></div>
-<div class="metric-slide-card" style="border-color:rgba(242,255,0,.1)"><div style="font-size:32px;margin-bottom:8px">&#128994;</div><div style="font-size:36px;font-weight:900;background:linear-gradient(135deg,var(--yel),var(--cy));-webkit-background-clip:text;-webkit-text-fill-color:transparent">50&ndash;65%</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Labor Cost Reduction</div><div style="font-size:12px;color:var(--g6)">Without sacrificing output</div></div>
+<div class="metric-slide-card" style="border-color:rgba(242,0,255,.1)"><div style="font-size:32px;margin-bottom:8px">&#128995;</div><div style="font-size:36px;font-weight:900;color:var(--cy)">$23,500+</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">First-Year Savings</div><div style="font-size:12px;color:var(--g6)">Per role vs $50K hire</div></div>
+<div class="metric-slide-card" style="border-color:rgba(0,255,255,.1)"><div style="font-size:32px;margin-bottom:8px">&#128309;</div><div style="font-size:36px;font-weight:900;color:var(--cy)">$32,000+</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Annual Savings Y2+</div><div style="font-size:12px;color:var(--g6)">Zero overhead</div></div>
+<div class="metric-slide-card" style="border-color:rgba(242,255,0,.1)"><div style="font-size:32px;margin-bottom:8px">&#128994;</div><div style="font-size:36px;font-weight:900;color:var(--cy)">50&ndash;65%</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Labor Cost Reduction</div><div style="font-size:12px;color:var(--g6)">Without sacrificing output</div></div>
 <div class="metric-slide-card" style="border-color:rgba(0,255,255,.1)"><div style="font-size:32px;margin-bottom:8px">&#9889;</div><div style="font-size:36px;font-weight:900;color:var(--cy)">24/7</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Always-On Operations</div><div style="font-size:12px;color:var(--g6)">No clock-ins. No downtime.</div></div>
 <div class="metric-slide-card" style="border-color:rgba(242,0,255,.1)"><div style="font-size:32px;margin-bottom:8px">&#9201;</div><div style="font-size:36px;font-weight:900;color:var(--mag)">3&ndash;5x</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Faster Execution</div><div style="font-size:12px;color:var(--g6)">AI vs human delays</div></div>
 <div class="metric-slide-card" style="border-color:rgba(242,255,0,.1)"><div style="font-size:32px;margin-bottom:8px">&#128260;</div><div style="font-size:36px;font-weight:900;color:var(--yel)">100%</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Process Consistency</div><div style="font-size:12px;color:var(--g6)">No missed steps</div></div>
@@ -473,9 +512,9 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 <div class="metric-slide-card" style="border-color:rgba(0,255,255,.08)"><div style="font-size:32px;margin-bottom:8px">&#128236;</div><div style="font-size:36px;font-weight:900;color:var(--cy)">100%</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Response Rate</div><div style="font-size:12px;color:var(--g6)">No missed leads</div></div>
 <div class="metric-slide-card" style="border-color:rgba(242,0,255,.08)"><div style="font-size:32px;margin-bottom:8px">&#128229;</div><div style="font-size:36px;font-weight:900;color:var(--mag)">2&ndash;3x</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Lead Response Speed</div><div style="font-size:12px;color:var(--g6)">Higher conversions</div></div>
 <!-- Duplicate for infinite loop -->
-<div class="metric-slide-card" style="border-color:rgba(242,0,255,.1)"><div style="font-size:32px;margin-bottom:8px">&#128995;</div><div style="font-size:36px;font-weight:900;background:linear-gradient(135deg,var(--mag),var(--cy));-webkit-background-clip:text;-webkit-text-fill-color:transparent">$23,500+</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">First-Year Savings</div><div style="font-size:12px;color:var(--g6)">Per role vs $50K hire</div></div>
-<div class="metric-slide-card" style="border-color:rgba(0,255,255,.1)"><div style="font-size:32px;margin-bottom:8px">&#128309;</div><div style="font-size:36px;font-weight:900;background:linear-gradient(135deg,var(--cy),var(--yel));-webkit-background-clip:text;-webkit-text-fill-color:transparent">$32,000+</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Annual Savings Y2+</div><div style="font-size:12px;color:var(--g6)">Zero overhead</div></div>
-<div class="metric-slide-card" style="border-color:rgba(242,255,0,.1)"><div style="font-size:32px;margin-bottom:8px">&#128994;</div><div style="font-size:36px;font-weight:900;background:linear-gradient(135deg,var(--yel),var(--cy));-webkit-background-clip:text;-webkit-text-fill-color:transparent">50&ndash;65%</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Labor Cost Reduction</div><div style="font-size:12px;color:var(--g6)">Without sacrificing output</div></div>
+<div class="metric-slide-card" style="border-color:rgba(242,0,255,.1)"><div style="font-size:32px;margin-bottom:8px">&#128995;</div><div style="font-size:36px;font-weight:900;color:var(--cy)">$23,500+</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">First-Year Savings</div><div style="font-size:12px;color:var(--g6)">Per role vs $50K hire</div></div>
+<div class="metric-slide-card" style="border-color:rgba(0,255,255,.1)"><div style="font-size:32px;margin-bottom:8px">&#128309;</div><div style="font-size:36px;font-weight:900;color:var(--cy)">$32,000+</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Annual Savings Y2+</div><div style="font-size:12px;color:var(--g6)">Zero overhead</div></div>
+<div class="metric-slide-card" style="border-color:rgba(242,255,0,.1)"><div style="font-size:32px;margin-bottom:8px">&#128994;</div><div style="font-size:36px;font-weight:900;color:var(--cy)">50&ndash;65%</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Labor Cost Reduction</div><div style="font-size:12px;color:var(--g6)">Without sacrificing output</div></div>
 </div>
 </div>
 
@@ -510,8 +549,8 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 <!-- POWER STATEMENT -->
 <div style="margin-top:48px;text-align:center;padding:40px 20px">
 <p style="font-size:clamp(20px,3vw,32px);font-weight:900;line-height:1.3;max-width:700px;margin:0 auto">
-<span style="background:linear-gradient(135deg,var(--cy),var(--mag));-webkit-background-clip:text;-webkit-text-fill-color:transparent">&ldquo;You&rsquo;re not replacing an employee&hellip;</span><br>
-<span style="background:linear-gradient(135deg,var(--cy),var(--mag),var(--yel));-webkit-background-clip:text;-webkit-text-fill-color:transparent">You&rsquo;re upgrading your entire operational system.&rdquo;</span>
+<span style="color:var(--cy)">&ldquo;You&rsquo;re not replacing an employee&hellip;</span><br>
+<span style="color:var(--cy)">You&rsquo;re upgrading your entire operational system.&rdquo;</span>
 </p>
 </div>
 
@@ -564,7 +603,7 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 </div>
 </section>
 
-<section class="sec" style="text-align:center">
+<section class="sec" style="text-align:center;padding-top:20px">
 <span class="tag" style="color:var(--cy)">Showcases</span>
 <h2 class="sh split-h">Our Work. Real-World Impact.</h2>
 <p style="color:var(--g4);font-size:15px;max-width:540px;margin:0 auto 40px">Experience our AI solutions and immersive digital experiences firsthand.</p>
@@ -579,7 +618,7 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 
 <div style="padding:48px 40px;border-radius:24px;background:linear-gradient(135deg,rgba(0,255,255,.04),rgba(242,0,255,.06));border:2px solid rgba(242,0,255,.12);box-shadow:0 16px 60px rgba(0,0,0,.4),0 0 40px rgba(242,0,255,.06);transition:all .4s">
 <div style="margin-bottom:20px"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfce5c9bd1396582f7ac05.png" alt="The Hello Plaza" style="width:120px;height:120px;object-fit:contain;border-radius:16px"></div>
-<h3 style="font-size:24px;font-weight:900;background:linear-gradient(135deg,var(--mag),var(--cy));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px">The Hello Plaza</h3>
+<h3 style="font-size:24px;font-weight:900;color:var(--cy);margin-bottom:8px">The Hello Plaza</h3>
 <p style="font-size:14px;color:var(--g4);line-height:1.6;margin-bottom:8px">Step into our immersive Metaverse experience. No VR headset needed &mdash; just click and explore.</p>
 <p style="font-size:12px;color:var(--mag);margin-bottom:20px;font-weight:600">&#9889; Browser-Based &bull; Instant Access</p>
 <a href="https://thehello.llc/VISITHELLOPLAZA" target="_blank" style="display:inline-block;padding:14px 32px;border-radius:50px;background:linear-gradient(135deg,var(--mag),#c000cc);color:#fff;font-size:14px;font-weight:800;letter-spacing:1px;text-transform:uppercase;box-shadow:0 4px 24px rgba(242,0,255,.25);transition:all .25s">Visit Hello Plaza</a>
@@ -619,18 +658,17 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 
 
 
-<!-- TESTIMONIALS - REAL GOOGLE REVIEWS -->
+<!-- TESTIMONIALS - THEY SAID YES -->
 <section class="sec" id="about">
-<div class="reviews-header">
-<div class="google-badge">
+<div class="reviews-header" style="text-align:center;margin-bottom:48px">
+<span class="tag" style="color:var(--cy)">Real Reviews from Real Clients</span>
+<h2 class="sh split-h" style="font-size:clamp(40px,8vw,80px);font-weight:900;line-height:1.05">THEY SAID <span style="font-family:'Amsterdam Four',cursive;color:#FF00FF;font-style:normal">Yes</span></h2>
+<div class="google-badge" style="margin-top:20px">
 <span class="g-logo">G</span>
 <span class="g-rating">5.0</span>
 <span class="g-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
 <span class="g-count">15 Reviews on Google</span>
 </div>
-<br>
-<span class="tag" style="color:var(--cy)">Real Reviews from Real Clients</span>
-<h2 class="sh split-h">5-Star Rated on Google</h2>
 </div>
 <div class="rev-masonry">
 <div class="rev-card"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>&#8220;I recently worked with The Hello LLC for the first time. They asked a lot of questions to make sure their solution was tailored to my unique problem. They sent a summary and checked back in with me to monitor success.&#8221;</p><div class="author"><div class="av">D</div><div><strong>Dreamer Greene</strong><span>Google Review</span></div></div></div>
@@ -652,22 +690,34 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 <div style="text-align:center"><a href="https://app.gohighlevel.com/v2/preview/N8zBmwqGVXwDKZJDBzxz" target="_blank" class="bm" style="font-size:16px;padding:18px 40px">Book a Call</a></div>
 </div>
 
-<!-- TEAM -->
+<!-- TEAM - FLIP CAROUSEL -->
 <section class="sec" style="text-align:center">
 <span class="tag" style="color:var(--cy)">Our Leadership</span>
 <h2 class="sh split-h">Meet Your Automation Experts</h2>
 <p style="color:var(--g4);font-size:15px;max-width:540px;margin:0 auto">Driven by experience. Focused on results.</p>
-<div class="team-grid">
-<div class="tm-card"><div class="tav"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfb6e59bd1395ab8f64b3a.png" alt="David - Co-Founder"></div><h4>David</h4><span class="tm-role">Co-Founder &bull; CEO</span></div>
-<div class="tm-card"><div class="tav"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfb6e55596d1d064f275a1.png" alt="Izzy - AI Assistant"></div><h4>Izzy</h4><span class="tm-role">AI Assistant &bull; 24/7</span></div>
-<div class="tm-card"><div class="tav"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfb6e5ad14006724e4f55e.png" alt="Tara - Co-Founder"></div><h4>Tara</h4><span class="tm-role">Co-Founder &bull; COO</span></div>
+<div class="team-flip-carousel" style="position:relative;max-width:400px;margin:48px auto 0;min-height:380px;perspective:1200px">
+<div class="team-flip-card" data-active="true" style="position:absolute;inset:0;backface-visibility:hidden;transition:all .6s">
+<div class="tm-card" style="height:100%"><div class="tav"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfb6e59bd1395ab8f64b3a.png" alt="David - Co-Founder"></div><h4 style="color:var(--yel)">David</h4><span class="tm-role">Co-Founder &bull; CEO</span></div>
+</div>
+<div class="team-flip-card" style="position:absolute;inset:0;backface-visibility:hidden;opacity:0;transform:rotateY(90deg)">
+<div class="tm-card" style="height:100%"><div class="tav"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfb6e55596d1d064f275a1.png" alt="Izzy - AI Assistant"></div><h4 style="color:var(--cy)">Izzy</h4><span class="tm-role">AI Assistant &bull; 24/7</span></div>
+</div>
+<div class="team-flip-card" style="position:absolute;inset:0;backface-visibility:hidden;opacity:0;transform:rotateY(90deg)">
+<div class="tm-card" style="height:100%"><div class="tav"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfb6e5ad14006724e4f55e.png" alt="Tara - Co-Founder"></div><h4 style="color:var(--mag)">Tara</h4><span class="tm-role">Co-Founder &bull; COO</span></div>
+</div>
+<!-- Team flip dots -->
+<div class="team-dots" style="position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);display:flex;gap:10px">
+<button class="team-dot active" data-index="0" style="width:12px;height:12px;border-radius:50%;background:var(--cy);border:none;cursor:pointer;transition:all .3s"></button>
+<button class="team-dot" data-index="1" style="width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.2);border:none;cursor:pointer;transition:all .3s"></button>
+<button class="team-dot" data-index="2" style="width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.2);border:none;cursor:pointer;transition:all .3s"></button>
+</div>
 </div>
 </section>
 
 <!-- FAQ -->
 <section class="sec" id="faq" style="text-align:center;padding:100px 20px">
 <span class="tag" style="color:var(--cy);font-size:13px;letter-spacing:6px">&#10067; FAQ</span>
-<h2 class="sh split-h" style="font-size:clamp(32px,6vw,56px);margin-bottom:48px">Got Questions?<br><span style="background:linear-gradient(135deg,var(--cy),var(--mag),var(--yel));-webkit-background-clip:text;-webkit-text-fill-color:transparent">We&rsquo;ve Got Answers.</span></h2>
+<h2 class="sh split-h" style="font-size:clamp(32px,6vw,56px);margin-bottom:48px">Got Questions?<br><span style="color:var(--cy)">We&rsquo;ve Got Answers.</span></h2>
 
 <div class="faq-new" style="max-width:1100px;margin:0 auto;text-align:left;display:grid;grid-template-columns:1fr 1fr;gap:16px">
 
@@ -781,16 +831,17 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 </div>
 
 <!-- Social Media -->
-<div style="margin-bottom:48px;padding:40px 20px">
-<p style="font-size:16px;letter-spacing:6px;text-transform:uppercase;color:var(--cy);font-weight:800;margin-bottom:32px">Follow Us</p>
-<div class="social-dock" style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;align-items:flex-end;perspective:800px">
-<a href="https://www.facebook.com/groups/990175411646319?ref=share" target="_blank" class="social-icon-link" style="width:72px;height:72px;border-radius:20px;background:rgba(0,255,255,.06);border:1px solid rgba(0,255,255,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="Facebook"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f3b3a58226ad1a00c.png" alt="Facebook" style="width:100%;height:100%;object-fit:contain"></a>
-<a href="https://www.instagram.com/thehellollc/" target="_blank" class="social-icon-link" style="width:72px;height:72px;border-radius:20px;background:rgba(242,0,255,.06);border:1px solid rgba(242,0,255,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="Instagram"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f9bd13948ebf86541.png" alt="Instagram" style="width:100%;height:100%;object-fit:contain"></a>
-<a href="https://www.youtube.com/channel/UCZ9qeSXP75tcE7maB50Q97w" target="_blank" class="social-icon-link" style="width:72px;height:72px;border-radius:20px;background:rgba(242,0,255,.06);border:1px solid rgba(242,0,255,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="YouTube"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f9bd139152df86542.png" alt="YouTube" style="width:100%;height:100%;object-fit:contain"></a>
-<a href="https://tiktok.com/@hellollc" target="_blank" class="social-icon-link" style="width:72px;height:72px;border-radius:20px;background:rgba(242,255,0,.06);border:1px solid rgba(242,255,0,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="TikTok"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f83f1a11215401356.png" alt="TikTok" style="width:100%;height:100%;object-fit:contain"></a>
-<a href="https://www.linkedin.com/company/hellollc" target="_blank" class="social-icon-link" style="width:72px;height:72px;border-radius:20px;background:rgba(0,255,255,.06);border:1px solid rgba(0,255,255,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="LinkedIn"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f18f77c9954c1748a.png" alt="LinkedIn" style="width:100%;height:100%;object-fit:contain"></a>
-<a href="https://www.threads.net/@thehellollc" target="_blank" class="social-icon-link" style="width:72px;height:72px;border-radius:20px;background:rgba(0,255,255,.06);border:1px solid rgba(0,255,255,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="Threads"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f3b3a5822b8d1a00d.png" alt="Threads" style="width:100%;height:100%;object-fit:contain"></a>
-<a href="https://twitter.com/llc_hello" target="_blank" class="social-icon-link" style="width:72px;height:72px;border-radius:20px;background:rgba(242,255,0,.06);border:1px solid rgba(242,255,0,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="X (Twitter)"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd9369bd1391abdf871ef.png" alt="X" style="width:100%;height:100%;object-fit:contain"></a>
+<div style="margin-bottom:48px;padding:80px 20px;background:linear-gradient(145deg,rgba(0,255,255,.04),rgba(242,0,255,.03));border-radius:32px;border:1px solid rgba(0,255,255,.08);max-width:1000px;margin-left:auto;margin-right:auto">
+<p style="font-size:clamp(20px,3vw,28px);letter-spacing:8px;text-transform:uppercase;color:var(--cy);font-weight:900;margin-bottom:16px">Follow Us</p>
+<p style="font-size:16px;color:var(--g4);margin-bottom:40px">Stay connected across all platforms</p>
+<div class="social-dock" style="display:flex;gap:32px;justify-content:center;flex-wrap:wrap;align-items:flex-end;perspective:800px">
+<a href="https://www.facebook.com/groups/990175411646319?ref=share" target="_blank" class="social-icon-link" style="width:100px;height:100px;border-radius:24px;background:rgba(0,255,255,.06);border:1px solid rgba(0,255,255,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="Facebook"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f3b3a58226ad1a00c.png" alt="Facebook" style="width:100%;height:100%;object-fit:contain"></a>
+<a href="https://www.instagram.com/thehellollc/" target="_blank" class="social-icon-link" style="width:100px;height:100px;border-radius:24px;background:rgba(242,0,255,.06);border:1px solid rgba(242,0,255,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="Instagram"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f9bd13948ebf86541.png" alt="Instagram" style="width:100%;height:100%;object-fit:contain"></a>
+<a href="https://www.youtube.com/channel/UCZ9qeSXP75tcE7maB50Q97w" target="_blank" class="social-icon-link" style="width:100px;height:100px;border-radius:24px;background:rgba(242,0,255,.06);border:1px solid rgba(242,0,255,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="YouTube"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f9bd139152df86542.png" alt="YouTube" style="width:100%;height:100%;object-fit:contain"></a>
+<a href="https://tiktok.com/@hellollc" target="_blank" class="social-icon-link" style="width:100px;height:100px;border-radius:24px;background:rgba(242,255,0,.06);border:1px solid rgba(242,255,0,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="TikTok"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f83f1a11215401356.png" alt="TikTok" style="width:100%;height:100%;object-fit:contain"></a>
+<a href="https://www.linkedin.com/company/hellollc" target="_blank" class="social-icon-link" style="width:100px;height:100px;border-radius:24px;background:rgba(0,255,255,.06);border:1px solid rgba(0,255,255,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="LinkedIn"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f18f77c9954c1748a.png" alt="LinkedIn" style="width:100%;height:100%;object-fit:contain"></a>
+<a href="https://www.threads.net/@thehellollc" target="_blank" class="social-icon-link" style="width:100px;height:100px;border-radius:24px;background:rgba(0,255,255,.06);border:1px solid rgba(0,255,255,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="Threads"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f3b3a5822b8d1a00d.png" alt="Threads" style="width:100%;height:100%;object-fit:contain"></a>
+<a href="https://twitter.com/llc_hello" target="_blank" class="social-icon-link" style="width:100px;height:100px;border-radius:24px;background:rgba(242,255,0,.06);border:1px solid rgba(242,255,0,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="X (Twitter)"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd9369bd1391abdf871ef.png" alt="X" style="width:100%;height:100%;object-fit:contain"></a>
 </div>
 </div>
 
@@ -807,8 +858,11 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 
 </section>
 
+<!-- FOOTER BOUNCE WRAPPER -->
+<div class="footer-bounce-wrapper" style="position:relative;overflow:hidden">
+<div class="footer-bounce-overlay" style="position:absolute;top:0;left:0;right:0;height:100%;background:var(--dk);z-index:2;transform-origin:top center"></div>
 <!-- FOOTER -->
-<footer>
+<footer style="position:relative;z-index:1">
 <div class="fg">
 <div><div style="font-size:14px;font-weight:900;letter-spacing:4px;color:var(--cy)">THE HELLO LLC</div><div style="font-size:9px;color:var(--g6);letter-spacing:2px;margin-top:2px">DIGITAL INFRASTRUCTURE COMPANY</div><p style="font-size:12px;color:var(--g6);line-height:1.6;margin-top:12px">AI-powered systems at 10% of hiring cost.</p><p style="margin-top:8px;font-size:12px;color:var(--cy)">hello@thehellollc.com</p><p style="font-size:12px;color:var(--g6)">(832) 516-0929</p><div class="soc" style="margin-top:12px"><a href="https://www.instagram.com/thehellollc/" target="_blank">&#128247;</a><a href="https://www.facebook.com/groups/990175411646319?ref=share" target="_blank">&#128077;</a><a href="https://www.linkedin.com/company/hellollc" target="_blank">&#128188;</a><a href="#">&#128250;</a><a href="#">&#127928;</a></div></div>
 <div class="fc"><h5>Navigate</h5><a href="HELLO-LLC-Pricing-Page.html#track-corp">Companies</a><a href="HELLO-LLC-Pricing-Page.html#track-ent">Entrepreneurs</a><a href="#services">Services</a><a href="#podcast">Podcast</a><a href="https://thehello.llc/VISITHELLOPLAZA" target="_blank">Metaverse</a></div>
@@ -816,6 +870,7 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 </div>
 <div class="fbot"><span>&copy; 2026 THE HELLO LLC. All rights reserved.</span><div style="display:flex;gap:20px"><a href="#">Terms</a><a href="#">Privacy</a><a href="#">Refund Policy</a></div></div>
 </footer>
+</div><!-- end footer-bounce-wrapper -->
 
 </div></div>
 <script>
@@ -858,14 +913,29 @@ gsap.from(c.querySelector('.svc-img-wrap img'),{scrollTrigger:{trigger:c,start:'
 gsap.from(c.querySelector('.svc-number'),{scrollTrigger:{trigger:c,start:'top 85%'},y:-40,opacity:0,duration:0.6,delay:0.3,ease:'hello-bounce'});
 });
 
-// Metrics hero card
-gsap.from('.metrics-hero-card',{scrollTrigger:{trigger:'.metrics-hero-card',start:'top 85%'},x:-80,opacity:0,scale:0.9,duration:1,ease:'hello-bounce'});
-gsap.from('.metrics-hero-val',{scrollTrigger:{trigger:'.metrics-hero-val',start:'top 85%'},scale:0.3,opacity:0,duration:1,delay:0.2,ease:'hello-bounce'});
-
-// Metric pills
-gsap.utils.toArray('.metric-pill').forEach(function(n,i){
-gsap.from(n,{scrollTrigger:{trigger:'.metrics-side',start:'top 85%'},x:80,opacity:0,duration:0.7,delay:i*0.2,ease:'hello-snap'});
+// GSAP Flip Carousel for Metrics
+(function(){
+var cards=document.querySelectorAll('.flip-card');
+var dots=document.querySelectorAll('.flip-dot');
+if(cards.length<2)return;
+var current=0;var total=cards.length;var autoTimer;
+function showCard(idx){
+cards.forEach(function(c,i){
+if(i===idx){gsap.to(c,{opacity:1,scale:1,rotationY:0,duration:0.6,ease:'hello-bounce'});}
+else{gsap.to(c,{opacity:0,scale:0.8,rotationY:i<idx?-90:90,duration:0.4,ease:'hello-snap'});}
 });
+dots.forEach(function(d,i){d.style.background=i===idx?'var(--cy)':'rgba(255,255,255,.2)';});
+}
+function next(){current=(current+1)%total;showCard(current);}
+autoTimer=setInterval(next,3500);
+dots.forEach(function(d){d.addEventListener('click',function(){
+current=parseInt(this.dataset.index);showCard(current);clearInterval(autoTimer);autoTimer=setInterval(next,3500);
+});});
+// Pause on hover
+var carousel=document.querySelector('.flip-carousel');
+if(carousel){carousel.addEventListener('mouseenter',function(){clearInterval(autoTimer);});
+carousel.addEventListener('mouseleave',function(){autoTimer=setInterval(next,3500);});}
+})();
 
 
 
@@ -885,10 +955,28 @@ gsap.from('.pod-art',{scrollTrigger:{trigger:'.pod-layout',start:'top 85%'},x:-8
 gsap.from('.pod-content',{scrollTrigger:{trigger:'.pod-layout',start:'top 85%'},x:80,opacity:0,duration:0.9,delay:0.15,ease:'hello-snap'});
 gsap.from('.pod-art-badge',{scrollTrigger:{trigger:'.pod-layout',start:'top 80%'},scale:0,opacity:0,duration:0.6,delay:0.5,ease:'hello-bounce'});
 
-// Team
-gsap.utils.toArray('.tm-card').forEach(function(c,i){
-gsap.from(c,{scrollTrigger:{trigger:c,start:'top 85%'},y:40,opacity:0,scale:0.9,duration:0.7,delay:i*0.15,ease:'hello-bounce'});
+// Team Flip Carousel
+(function(){
+var cards=document.querySelectorAll('.team-flip-card');
+var dots=document.querySelectorAll('.team-dot');
+if(cards.length<2)return;
+var current=0;var total=cards.length;var autoTimer;
+function showCard(idx){
+cards.forEach(function(c,i){
+if(i===idx){gsap.to(c,{opacity:1,rotateY:0,scale:1,duration:0.6,ease:'hello-bounce'});}
+else{gsap.to(c,{opacity:0,rotateY:i<idx?-90:90,scale:0.8,duration:0.4,ease:'hello-snap'});}
 });
+dots.forEach(function(d,i){d.style.background=i===idx?'var(--cy)':'rgba(255,255,255,.2)';});
+}
+function next(){current=(current+1)%total;showCard(current);}
+autoTimer=setInterval(next,4000);
+dots.forEach(function(d){d.addEventListener('click',function(){
+current=parseInt(this.dataset.index);showCard(current);clearInterval(autoTimer);autoTimer=setInterval(next,4000);
+});});
+var carousel=document.querySelector('.team-flip-carousel');
+if(carousel){carousel.addEventListener('mouseenter',function(){clearInterval(autoTimer);});
+carousel.addEventListener('mouseleave',function(){autoTimer=setInterval(next,4000);});}
+})();
 
 // CTA band
 gsap.from('.cta-band',{scrollTrigger:{trigger:'.cta-band',start:'top 80%'},y:40,opacity:0,duration:0.8,ease:'hello-snap'});
@@ -926,7 +1014,13 @@ c.addEventListener('mouseenter',function(){gsap.to(c,{scale:1.05,y:-8,duration:0
 c.addEventListener('mouseleave',function(){gsap.to(c,{scale:1,y:0,duration:0.4,ease:'hello-bounce'});});
 });
 
-// Video showcase
+// Video showcase - autoplay on scroll, muted
+(function(){
+var vid=document.getElementById('hero-video');
+if(vid){
+ScrollTrigger.create({trigger:'.video-showcase',start:'top 80%',end:'bottom 20%',onEnter:function(){vid.play();},onLeave:function(){vid.pause();},onEnterBack:function(){vid.play();},onLeaveBack:function(){vid.pause();}});
+}
+})();
 gsap.from('.video-showcase',{scrollTrigger:{trigger:'.video-showcase',start:'top 85%'},scale:0.8,opacity:0,rotation:-3,duration:1,ease:'hello-bounce'});
 
 // Contact section
@@ -1094,6 +1188,25 @@ gsap.to(track,{x:'-50%',duration:25,ease:'none',repeat:-1});
 var section=document.querySelector('.wayfinder-section');
 if(!section)return;
 ScrollTrigger.create({trigger:section,start:'top top',end:'+=300',pin:true,pinSpacing:true});
+})();
+
+// ========== FOOTER BOUNCE EFFECT ==========
+(function(){
+var wrapper=document.querySelector('.footer-bounce-wrapper');
+var overlay=document.querySelector('.footer-bounce-overlay');
+if(!wrapper||!overlay)return;
+ScrollTrigger.create({
+trigger:wrapper,
+start:'top 90%',
+end:'top 30%',
+scrub:false,
+onEnter:function(){
+gsap.to(overlay,{scaleY:0,duration:1.2,ease:'elastic.out(1,0.4)'});
+},
+onLeaveBack:function(){
+gsap.set(overlay,{scaleY:1});
+}
+});
 })();
 
 // ========== MOTIONPATH WAYPOINTS - floating elements ==========
