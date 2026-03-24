@@ -18,6 +18,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.14/dist/CustomEase.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.14/dist/TextPlugin.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.14/dist/MotionPathPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14/dist/DrawSVGPlugin.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 <style>
 :root{--cy:#00ffff;--mag:#f200ff;--yel:#f2ff00;--dk:#08081a;--g4:#adb5bd;--g6:#6c757d;}
@@ -206,9 +207,9 @@ nav.solid{background:rgba(8,8,26,.96);box-shadow:0 4px 30px rgba(0,0,0,.5);}
 .horizontal-scroll-track{display:flex;gap:24px;width:max-content;padding:0 40px;}
 .horizontal-scroll-track .svc-card{min-width:70vw;max-width:900px;flex-shrink:0;grid-template-columns:1fr;border-radius:32px;overflow:hidden;position:relative;min-height:500px;}
 .horizontal-scroll-track .svc-card .svc-img-wrap{position:absolute;inset:0;min-height:100%;z-index:0;}
-.horizontal-scroll-track .svc-card .svc-img-wrap img{width:100%;height:100%;object-fit:cover;filter:brightness(0.4);}
+.horizontal-scroll-track .svc-card .svc-img-wrap img{width:100%;height:100%;object-fit:cover;filter:brightness(0.25) saturate(0.7);}
 .horizontal-scroll-track .svc-card .svc-content{position:relative;z-index:2;padding:60px 48px;display:flex;flex-direction:column;justify-content:flex-end;min-height:500px;}
-.horizontal-scroll-track .svc-card .svc-content h3{font-size:clamp(32px,4vw,52px);color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.5);}
+.horizontal-scroll-track .svc-card .svc-content h3{font-size:clamp(42px,6vw,72px);font-weight:900;letter-spacing:2px;color:#fff;text-shadow:0 4px 30px rgba(0,0,0,.7);}
 .horizontal-scroll-track .svc-card .svc-content p{font-size:16px;color:rgba(255,255,255,.85);max-width:500px;}
 .horizontal-scroll-track .svc-card .svc-number{position:absolute;top:30px;right:36px;font-size:120px;color:rgba(255,255,255,.08);z-index:1;}
 @media(max-width:768px){.horizontal-scroll-track .svc-card{min-width:90vw;min-height:400px;}.horizontal-scroll-track .svc-card .svc-content{min-height:400px;padding:40px 28px;}}
@@ -298,12 +299,12 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 .svc-card{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:24px;overflow:hidden;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);transition:all .5s cubic-bezier(.34,1.56,.64,1);position:relative;}
 .svc-card:hover{border-color:rgba(0,255,255,.12);box-shadow:0 24px 80px rgba(0,0,0,.5),0 0 40px rgba(0,255,255,.04);transform:translateY(-4px);}
 .svc-img-wrap{position:relative;overflow:hidden;min-height:320px;}
-.svc-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.34,1.56,.64,1),filter .5s;}
-.svc-card:hover .svc-img-wrap img{transform:scale(1.06);filter:brightness(1.15) saturate(1.1);}
+.svc-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.34,1.56,.64,1),filter .5s;filter:brightness(0.35) saturate(0.7);}
+.svc-card:hover .svc-img-wrap img{transform:scale(1.06);filter:brightness(0.5) saturate(0.9);}
 .svc-number{position:absolute;top:20px;right:24px;font-size:72px;font-weight:900;color:rgba(255,255,255,.06);line-height:1;pointer-events:none;transition:color .4s;}
 .svc-card:hover .svc-number{color:rgba(0,255,255,.12);}
 .svc-content{padding:40px 36px;display:flex;flex-direction:column;justify-content:center;}
-.svc-tag{font-size:11px;font-weight:800;letter-spacing:4px;text-transform:uppercase;margin-bottom:16px;}
+.svc-tag{font-size:clamp(24px,3vw,36px);font-weight:900;letter-spacing:4px;text-transform:uppercase;margin-bottom:16px;}
 .svc-content h3{font-size:clamp(24px,3vw,36px);font-weight:900;line-height:1.1;margin-bottom:16px;color:#fff;}
 .svc-content p{font-size:14px;color:var(--g4);line-height:1.65;margin-bottom:24px;}
 .svc-stat{display:flex;align-items:baseline;gap:10px;padding-top:16px;border-top:1px solid rgba(255,255,255,.06);}
@@ -323,19 +324,19 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 }
 
 /* TRUST GALLERY */
-.tg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;perspective:1200px;}
-.tg-item{position:relative;border-radius:18px;overflow:hidden;cursor:pointer;transition:all .5s cubic-bezier(.34,1.56,.64,1);border:2px solid transparent;}
-.tg-item img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.34,1.56,.64,1),filter .4s;}
-.tg-item:hover img{transform:scale(1.08);filter:brightness(1.1);}
+.tg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;perspective:1200px;}
+.tg-item{position:relative;border-radius:18px;overflow:visible;cursor:pointer;transition:all .5s cubic-bezier(.34,1.56,.64,1);border:2px solid transparent;}
+.tg-item img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.34,1.56,.64,1),filter .4s;border-radius:18px;box-shadow:0 12px 40px rgba(0,0,0,.4);}
+.tg-item:hover img{transform:scale(1.12);filter:brightness(1.1);}
 .tg-item:hover{border-color:var(--cy);box-shadow:0 20px 60px rgba(0,255,255,.15),0 0 30px rgba(0,255,255,.08);}
 .tg-overlay{position:absolute;bottom:0;left:0;right:0;padding:16px 20px;background:linear-gradient(transparent,rgba(8,8,26,.9));transform:translateY(100%);transition:transform .4s cubic-bezier(.34,1.56,.64,1);}
 .tg-item:hover .tg-overlay{transform:translateY(0);}
 .tg-overlay span{font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--cy);}
-.tg-item-1{transform:rotate(-2deg) translateY(12px);}
-.tg-item-2{transform:rotate(1.5deg) translateY(-8px);}
-.tg-item-3{transform:rotate(-1deg) translateY(16px);}
-.tg-item-4{transform:rotate(2deg) translateY(-4px);}
-.tg-item-1:hover,.tg-item-2:hover,.tg-item-3:hover,.tg-item-4:hover{transform:rotate(0deg) translateY(-8px) scale(1.03);}
+.tg-item-1{transform:rotate(-6deg) translateY(18px) scale(1.05);}
+.tg-item-2{transform:rotate(5deg) translateY(-14px) scale(1.05);}
+.tg-item-3{transform:rotate(-4deg) translateY(22px) scale(1.05);}
+.tg-item-4{transform:rotate(7deg) translateY(-10px) scale(1.05);}
+.tg-item-1:hover,.tg-item-2:hover,.tg-item-3:hover,.tg-item-4:hover{transform:rotate(0deg) translateY(-12px) scale(1.1);}
 @media(max-width:768px){.tg-grid{grid-template-columns:1fr 1fr;gap:12px;}.tg-item img{aspect-ratio:16/9;}.tg-item-1,.tg-item-2,.tg-item-3,.tg-item-4{transform:none;}}
 </style>
 </head><body>
@@ -373,7 +374,7 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 </section>
 
 <!-- WHAT WE DO -->
-<section style="background:#00cccc;padding:100px 40px;text-align:center;position:relative;z-index:1;">
+<section style="background:#f5f5f0;padding:100px 40px;text-align:center;position:relative;z-index:1;">
 <span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:11px;letter-spacing:6px;color:#0a1a3a;font-weight:700;text-transform:uppercase;display:block;margin-bottom:40px;">WHAT WE DO</span>
 <p style="font-family:'Decalotype',sans-serif;font-size:clamp(36px,7.5vw,88px);font-weight:900;font-style:italic;color:#0a1a3a;line-height:1.05;margin:0 auto;max-width:1200px;text-transform:uppercase;letter-spacing:1px;">WE IMPLEMENT SMART SYSTEMS THAT TURN CONVERSATIONS INTO <span style="font-family:'Amsterdam Four',cursive;font-style:normal;color:#FF00FF;text-transform:none;">&ldquo;Yes&rdquo;</span> FOR YOUR COMPANY.</p>
 </section>
@@ -439,7 +440,7 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 </div>
 </div>
 <div class="svc-card svc-card-4" style="border-color:rgba(0,255,255,.08)">
-<div class="svc-img-wrap" style="background:linear-gradient(135deg,#0a1628,#1a1040);"><div class="svc-number">04</div></div>
+<div class="svc-img-wrap"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69c24277aae407e071be3018.png" alt="Business Services" loading="lazy"><div class="svc-number">04</div></div>
 <div class="svc-content">
 <div class="svc-tag" style="color:var(--cy)">&#9632; BUSINESS SERVICES</div>
 <h3>Full-Service Support<br>Built to Scale</h3>
@@ -455,66 +456,47 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 <span class="tag" style="color:var(--cy)">Performance at a Glance</span>
 <h2 class="sh split-h" style="font-size:clamp(28px,5vw,52px);font-weight:900">Metrics That Matter Most</h2>
 
-<!-- GSAP FLIP CAROUSEL - METRICS -->
-<div class="flip-carousel" style="margin-top:40px;position:relative;max-width:800px;margin-left:auto;margin-right:auto;min-height:360px;perspective:1200px">
-<div class="flip-card" data-active="true" style="position:absolute;inset:0;padding:48px 44px;border-radius:32px;background:linear-gradient(145deg,rgba(0,255,255,.08),rgba(242,0,255,.04));border:2px solid rgba(0,255,255,.15);backface-visibility:hidden;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center">
-<div style="font-size:64px;margin-bottom:12px">&#128176;</div>
-<div style="font-size:clamp(56px,10vw,110px);font-weight:900;color:var(--cy);line-height:1">$23,500+</div>
-<p style="font-size:18px;font-weight:700;color:#fff;margin:8px 0 4px">SAVED</p>
-<p style="font-size:14px;color:var(--g4)">Per role. Year one. Compared to hiring a $50K employee.</p>
+<!-- GSAP FLIP FLEXBOX FILTERING - METRICS -->
+<div style="margin-top:40px;text-align:center">
+<div class="metrics-filter-buttons" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:32px">
+<button class="mf-btn active" data-filter="all" style="padding:10px 24px;border-radius:40px;background:var(--cy);color:var(--dk);border:2px solid var(--cy);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .3s">ALL</button>
+<button class="mf-btn" data-filter="savings" style="padding:10px 24px;border-radius:40px;background:transparent;color:var(--cy);border:2px solid rgba(0,255,255,.3);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .3s">SAVINGS</button>
+<button class="mf-btn" data-filter="performance" style="padding:10px 24px;border-radius:40px;background:transparent;color:var(--mag);border:2px solid rgba(242,0,255,.3);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .3s">PERFORMANCE</button>
+<button class="mf-btn" data-filter="reliability" style="padding:10px 24px;border-radius:40px;background:transparent;color:var(--yel);border:2px solid rgba(242,255,0,.3);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .3s">RELIABILITY</button>
 </div>
-<div class="flip-card" style="position:absolute;inset:0;padding:48px 44px;border-radius:32px;background:linear-gradient(145deg,rgba(242,0,255,.08),rgba(0,255,255,.04));border:2px solid rgba(242,0,255,.15);backface-visibility:hidden;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0">
-<div style="font-size:64px;margin-bottom:12px">&#9889;</div>
-<div style="font-size:clamp(56px,10vw,110px);font-weight:900;color:var(--cy);line-height:1">24/7</div>
-<p style="font-size:18px;font-weight:700;color:#fff;margin:8px 0 4px">OPERATIONS</p>
-<p style="font-size:14px;color:var(--g4)">No clock-ins. No downtime. Always-on automation.</p>
-</div>
-<div class="flip-card" style="position:absolute;inset:0;padding:48px 44px;border-radius:32px;background:linear-gradient(145deg,rgba(242,255,0,.08),rgba(0,255,255,.04));border:2px solid rgba(242,255,0,.15);backface-visibility:hidden;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0">
-<div style="font-size:64px;margin-bottom:12px">&#10060;</div>
-<div style="font-size:clamp(56px,10vw,110px);font-weight:900;color:var(--cy);line-height:1">0%</div>
-<p style="font-size:18px;font-weight:700;color:#fff;margin:8px 0 4px">TURNOVER</p>
-<p style="font-size:14px;color:var(--g4)">No rehiring. No retraining. Zero risk.</p>
-</div>
-<div class="flip-card" style="position:absolute;inset:0;padding:48px 44px;border-radius:32px;background:linear-gradient(145deg,rgba(0,255,255,.08),rgba(242,255,0,.04));border:2px solid rgba(0,255,255,.15);backface-visibility:hidden;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0">
-<div style="font-size:64px;margin-bottom:12px">&#9201;</div>
-<div style="font-size:clamp(56px,10vw,110px);font-weight:900;color:var(--cy);line-height:1">3&ndash;5x</div>
-<p style="font-size:18px;font-weight:700;color:#fff;margin:8px 0 4px">FASTER EXECUTION</p>
-<p style="font-size:14px;color:var(--g4)">AI vs human delays. Instant processing.</p>
-</div>
-<div class="flip-card" style="position:absolute;inset:0;padding:48px 44px;border-radius:32px;background:linear-gradient(145deg,rgba(242,0,255,.08),rgba(242,255,0,.04));border:2px solid rgba(242,0,255,.15);backface-visibility:hidden;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0">
-<div style="font-size:64px;margin-bottom:12px">&#128200;</div>
-<div style="font-size:clamp(56px,10vw,110px);font-weight:900;color:var(--cy);line-height:1">50%+</div>
-<p style="font-size:18px;font-weight:700;color:#fff;margin:8px 0 4px">COST REDUCTION</p>
-<p style="font-size:14px;color:var(--g4)">Without sacrificing output quality.</p>
-</div>
-<!-- Flip carousel nav dots -->
-<div class="flip-dots" style="position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);display:flex;gap:10px">
-<button class="flip-dot active" data-index="0" style="width:12px;height:12px;border-radius:50%;background:var(--cy);border:none;cursor:pointer;transition:all .3s"></button>
-<button class="flip-dot" data-index="1" style="width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.2);border:none;cursor:pointer;transition:all .3s"></button>
-<button class="flip-dot" data-index="2" style="width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.2);border:none;cursor:pointer;transition:all .3s"></button>
-<button class="flip-dot" data-index="3" style="width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.2);border:none;cursor:pointer;transition:all .3s"></button>
-<button class="flip-dot" data-index="4" style="width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.2);border:none;cursor:pointer;transition:all .3s"></button>
+<div class="metrics-flex-container" style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center">
+<div class="mf-card" data-category="savings" style="min-width:240px;flex:1 1 240px;max-width:320px;padding:32px 24px;border-radius:20px;background:rgba(255,255,255,.03);border:1px solid rgba(0,255,255,.12);text-align:center;transition:all .4s"><div style="font-size:48px;font-weight:900;color:var(--cy);line-height:1">$23,500+</div><div style="font-size:14px;font-weight:700;color:#fff;margin:8px 0 4px">First-Year Savings</div><div style="font-size:12px;color:var(--g6)">Per role vs $50K hire</div></div>
+<div class="mf-card" data-category="savings" style="min-width:240px;flex:1 1 240px;max-width:320px;padding:32px 24px;border-radius:20px;background:rgba(255,255,255,.03);border:1px solid rgba(0,255,255,.12);text-align:center;transition:all .4s"><div style="font-size:48px;font-weight:900;color:var(--cy);line-height:1">$32,000+</div><div style="font-size:14px;font-weight:700;color:#fff;margin:8px 0 4px">Annual Savings Y2+</div><div style="font-size:12px;color:var(--g6)">Zero overhead</div></div>
+<div class="mf-card" data-category="savings" style="min-width:240px;flex:1 1 240px;max-width:320px;padding:32px 24px;border-radius:20px;background:rgba(255,255,255,.03);border:1px solid rgba(242,0,255,.12);text-align:center;transition:all .4s"><div style="font-size:48px;font-weight:900;color:var(--mag);line-height:1">50&ndash;65%</div><div style="font-size:14px;font-weight:700;color:#fff;margin:8px 0 4px">Labor Cost Reduction</div><div style="font-size:12px;color:var(--g6)">Without sacrificing output</div></div>
+<div class="mf-card" data-category="performance" style="min-width:240px;flex:1 1 240px;max-width:320px;padding:32px 24px;border-radius:20px;background:rgba(255,255,255,.03);border:1px solid rgba(0,255,255,.12);text-align:center;transition:all .4s"><div style="font-size:48px;font-weight:900;color:var(--cy);line-height:1">24/7</div><div style="font-size:14px;font-weight:700;color:#fff;margin:8px 0 4px">Always-On Operations</div><div style="font-size:12px;color:var(--g6)">No clock-ins. No downtime.</div></div>
+<div class="mf-card" data-category="performance" style="min-width:240px;flex:1 1 240px;max-width:320px;padding:32px 24px;border-radius:20px;background:rgba(255,255,255,.03);border:1px solid rgba(242,0,255,.12);text-align:center;transition:all .4s"><div style="font-size:48px;font-weight:900;color:var(--mag);line-height:1">3&ndash;5x</div><div style="font-size:14px;font-weight:700;color:#fff;margin:8px 0 4px">Faster Execution</div><div style="font-size:12px;color:var(--g6)">AI vs human delays</div></div>
+<div class="mf-card" data-category="reliability" style="min-width:240px;flex:1 1 240px;max-width:320px;padding:32px 24px;border-radius:20px;background:rgba(255,255,255,.03);border:1px solid rgba(242,255,0,.12);text-align:center;transition:all .4s"><div style="font-size:48px;font-weight:900;color:var(--yel);line-height:1">100%</div><div style="font-size:14px;font-weight:700;color:#fff;margin:8px 0 4px">Process Consistency</div><div style="font-size:12px;color:var(--g6)">No missed steps</div></div>
+<div class="mf-card" data-category="reliability" style="min-width:240px;flex:1 1 240px;max-width:320px;padding:32px 24px;border-radius:20px;background:rgba(255,255,255,.03);border:1px solid rgba(242,0,255,.12);text-align:center;transition:all .4s"><div style="font-size:48px;font-weight:900;color:var(--mag);line-height:1">0%</div><div style="font-size:14px;font-weight:700;color:#fff;margin:8px 0 4px">Turnover Risk</div><div style="font-size:12px;color:var(--g6)">No rehiring needed</div></div>
+<div class="mf-card" data-category="performance" style="min-width:240px;flex:1 1 240px;max-width:320px;padding:32px 24px;border-radius:20px;background:rgba(255,255,255,.03);border:1px solid rgba(0,255,255,.12);text-align:center;transition:all .4s"><div style="font-size:48px;font-weight:900;color:var(--cy);line-height:1">1 = 3&ndash;5</div><div style="font-size:14px;font-weight:700;color:#fff;margin:8px 0 4px">Roles Replaced</div><div style="font-size:12px;color:var(--g6)">Admin + Support + More</div></div>
+<div class="mf-card" data-category="reliability" style="min-width:240px;flex:1 1 240px;max-width:320px;padding:32px 24px;border-radius:20px;background:rgba(255,255,255,.03);border:1px solid rgba(242,255,0,.12);text-align:center;transition:all .4s"><div style="font-size:48px;font-weight:900;color:var(--yel);line-height:1">99%+</div><div style="font-size:14px;font-weight:700;color:#fff;margin:8px 0 4px">Task Accuracy</div><div style="font-size:12px;color:var(--g6)">Eliminates human error</div></div>
+<div class="mf-card" data-category="reliability" style="min-width:240px;flex:1 1 240px;max-width:320px;padding:32px 24px;border-radius:20px;background:rgba(255,255,255,.03);border:1px solid rgba(0,255,255,.12);text-align:center;transition:all .4s"><div style="font-size:48px;font-weight:900;color:var(--cy);line-height:1">100%</div><div style="font-size:14px;font-weight:700;color:#fff;margin:8px 0 4px">Response Rate</div><div style="font-size:12px;color:var(--g6)">No missed leads</div></div>
+<div class="mf-card" data-category="performance" style="min-width:240px;flex:1 1 240px;max-width:320px;padding:32px 24px;border-radius:20px;background:rgba(255,255,255,.03);border:1px solid rgba(242,0,255,.12);text-align:center;transition:all .4s"><div style="font-size:48px;font-weight:900;color:var(--mag);line-height:1">2&ndash;3x</div><div style="font-size:14px;font-weight:700;color:#fff;margin:8px 0 4px">Lead Response Speed</div><div style="font-size:12px;color:var(--g6)">Higher conversions</div></div>
 </div>
 </div>
 
-<!-- INFINITE CARD SLIDER - ALL METRICS -->
-<div class="metrics-slider-wrap" style="margin-top:48px">
+<!-- METRICS SLIDER (LEGACY - HIDDEN) -->
+<div class="metrics-slider-wrap" style="margin-top:48px;display:none">
 <div class="metrics-slider-track">
-<div class="metric-slide-card" style="border-color:rgba(242,0,255,.1)"><div style="font-size:32px;margin-bottom:8px">&#128995;</div><div style="font-size:36px;font-weight:900;color:var(--cy)">$23,500+</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">First-Year Savings</div><div style="font-size:12px;color:var(--g6)">Per role vs $50K hire</div></div>
-<div class="metric-slide-card" style="border-color:rgba(0,255,255,.1)"><div style="font-size:32px;margin-bottom:8px">&#128309;</div><div style="font-size:36px;font-weight:900;color:var(--cy)">$32,000+</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Annual Savings Y2+</div><div style="font-size:12px;color:var(--g6)">Zero overhead</div></div>
-<div class="metric-slide-card" style="border-color:rgba(242,255,0,.1)"><div style="font-size:32px;margin-bottom:8px">&#128994;</div><div style="font-size:36px;font-weight:900;color:var(--cy)">50&ndash;65%</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Labor Cost Reduction</div><div style="font-size:12px;color:var(--g6)">Without sacrificing output</div></div>
-<div class="metric-slide-card" style="border-color:rgba(0,255,255,.1)"><div style="font-size:32px;margin-bottom:8px">&#9889;</div><div style="font-size:36px;font-weight:900;color:var(--cy)">24/7</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Always-On Operations</div><div style="font-size:12px;color:var(--g6)">No clock-ins. No downtime.</div></div>
-<div class="metric-slide-card" style="border-color:rgba(242,0,255,.1)"><div style="font-size:32px;margin-bottom:8px">&#9201;</div><div style="font-size:36px;font-weight:900;color:var(--mag)">3&ndash;5x</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Faster Execution</div><div style="font-size:12px;color:var(--g6)">AI vs human delays</div></div>
-<div class="metric-slide-card" style="border-color:rgba(242,255,0,.1)"><div style="font-size:32px;margin-bottom:8px">&#128260;</div><div style="font-size:36px;font-weight:900;color:var(--yel)">100%</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Process Consistency</div><div style="font-size:12px;color:var(--g6)">No missed steps</div></div>
-<div class="metric-slide-card" style="border-color:rgba(242,0,255,.08)"><div style="font-size:32px;margin-bottom:8px">&#10060;</div><div style="font-size:36px;font-weight:900;color:var(--mag)">0%</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Turnover Risk</div><div style="font-size:12px;color:var(--g6)">No rehiring needed</div></div>
-<div class="metric-slide-card" style="border-color:rgba(0,255,255,.08)"><div style="font-size:32px;margin-bottom:8px">&#129302;</div><div style="font-size:36px;font-weight:900;color:var(--cy)">1 = 3&ndash;5</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Roles Replaced</div><div style="font-size:12px;color:var(--g6)">Admin + Support + More</div></div>
-<div class="metric-slide-card" style="border-color:rgba(242,255,0,.08)"><div style="font-size:32px;margin-bottom:8px">&#127919;</div><div style="font-size:36px;font-weight:900;color:var(--yel)">99%+</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Task Accuracy</div><div style="font-size:12px;color:var(--g6)">Eliminates human error</div></div>
-<div class="metric-slide-card" style="border-color:rgba(0,255,255,.08)"><div style="font-size:32px;margin-bottom:8px">&#128236;</div><div style="font-size:36px;font-weight:900;color:var(--cy)">100%</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Response Rate</div><div style="font-size:12px;color:var(--g6)">No missed leads</div></div>
-<div class="metric-slide-card" style="border-color:rgba(242,0,255,.08)"><div style="font-size:32px;margin-bottom:8px">&#128229;</div><div style="font-size:36px;font-weight:900;color:var(--mag)">2&ndash;3x</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Lead Response Speed</div><div style="font-size:12px;color:var(--g6)">Higher conversions</div></div>
+<div class="metric-slide-card" style="border-color:rgba(242,0,255,.1)"><div style="font-size:36px;font-weight:900;color:var(--cy)">$23,500+</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">First-Year Savings</div><div style="font-size:12px;color:var(--g6)">Per role vs $50K hire</div></div>
+<div class="metric-slide-card" style="border-color:rgba(0,255,255,.1)"><div style="font-size:36px;font-weight:900;color:var(--cy)">$32,000+</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Annual Savings Y2+</div><div style="font-size:12px;color:var(--g6)">Zero overhead</div></div>
+<div class="metric-slide-card" style="border-color:rgba(242,255,0,.1)"><div style="font-size:36px;font-weight:900;color:var(--cy)">50&ndash;65%</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Labor Cost Reduction</div><div style="font-size:12px;color:var(--g6)">Without sacrificing output</div></div>
+<div class="metric-slide-card" style="border-color:rgba(0,255,255,.1)"><div style="font-size:36px;font-weight:900;color:var(--cy)">24/7</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Always-On Operations</div><div style="font-size:12px;color:var(--g6)">No clock-ins. No downtime.</div></div>
+<div class="metric-slide-card" style="border-color:rgba(242,0,255,.1)"><div style="font-size:36px;font-weight:900;color:var(--mag)">3&ndash;5x</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Faster Execution</div><div style="font-size:12px;color:var(--g6)">AI vs human delays</div></div>
+<div class="metric-slide-card" style="border-color:rgba(242,255,0,.1)"><div style="font-size:36px;font-weight:900;color:var(--yel)">100%</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Process Consistency</div><div style="font-size:12px;color:var(--g6)">No missed steps</div></div>
+<div class="metric-slide-card" style="border-color:rgba(242,0,255,.08)"><div style="font-size:36px;font-weight:900;color:var(--mag)">0%</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Turnover Risk</div><div style="font-size:12px;color:var(--g6)">No rehiring needed</div></div>
+<div class="metric-slide-card" style="border-color:rgba(0,255,255,.08)"><div style="font-size:36px;font-weight:900;color:var(--cy)">1 = 3&ndash;5</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Roles Replaced</div><div style="font-size:12px;color:var(--g6)">Admin + Support + More</div></div>
+<div class="metric-slide-card" style="border-color:rgba(242,255,0,.08)"><div style="font-size:36px;font-weight:900;color:var(--yel)">99%+</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Task Accuracy</div><div style="font-size:12px;color:var(--g6)">Eliminates human error</div></div>
+<div class="metric-slide-card" style="border-color:rgba(0,255,255,.08)"><div style="font-size:36px;font-weight:900;color:var(--cy)">100%</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Response Rate</div><div style="font-size:12px;color:var(--g6)">No missed leads</div></div>
+<div class="metric-slide-card" style="border-color:rgba(242,0,255,.08)"><div style="font-size:36px;font-weight:900;color:var(--mag)">2&ndash;3x</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Lead Response Speed</div><div style="font-size:12px;color:var(--g6)">Higher conversions</div></div>
 <!-- Duplicate for infinite loop -->
-<div class="metric-slide-card" style="border-color:rgba(242,0,255,.1)"><div style="font-size:32px;margin-bottom:8px">&#128995;</div><div style="font-size:36px;font-weight:900;color:var(--cy)">$23,500+</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">First-Year Savings</div><div style="font-size:12px;color:var(--g6)">Per role vs $50K hire</div></div>
-<div class="metric-slide-card" style="border-color:rgba(0,255,255,.1)"><div style="font-size:32px;margin-bottom:8px">&#128309;</div><div style="font-size:36px;font-weight:900;color:var(--cy)">$32,000+</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Annual Savings Y2+</div><div style="font-size:12px;color:var(--g6)">Zero overhead</div></div>
-<div class="metric-slide-card" style="border-color:rgba(242,255,0,.1)"><div style="font-size:32px;margin-bottom:8px">&#128994;</div><div style="font-size:36px;font-weight:900;color:var(--cy)">50&ndash;65%</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Labor Cost Reduction</div><div style="font-size:12px;color:var(--g6)">Without sacrificing output</div></div>
+<div class="metric-slide-card" style="border-color:rgba(242,0,255,.1)"><div style="font-size:36px;font-weight:900;color:var(--cy)">$23,500+</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">First-Year Savings</div><div style="font-size:12px;color:var(--g6)">Per role vs $50K hire</div></div>
+<div class="metric-slide-card" style="border-color:rgba(0,255,255,.1)"><div style="font-size:36px;font-weight:900;color:var(--cy)">$32,000+</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Annual Savings Y2+</div><div style="font-size:12px;color:var(--g6)">Zero overhead</div></div>
+<div class="metric-slide-card" style="border-color:rgba(242,255,0,.1)"><div style="font-size:36px;font-weight:900;color:var(--cy)">50&ndash;65%</div><div style="font-size:14px;font-weight:700;color:#fff;margin:4px 0">Labor Cost Reduction</div><div style="font-size:12px;color:var(--g6)">Without sacrificing output</div></div>
 </div>
 </div>
 
@@ -524,33 +506,33 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 <div style="position:absolute;top:12px;right:16px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--g6);font-weight:700">Old Way</div>
 <h4 style="font-size:20px;font-weight:900;color:var(--g4);margin-bottom:20px">Traditional Hire</h4>
 <ul style="list-style:none;padding:0;margin:0 0 24px">
-<li style="font-size:14px;color:var(--g6);padding:8px 0;border-bottom:1px solid rgba(255,255,255,.03)">&#10060; $40K&ndash;$50K Salary</li>
-<li style="font-size:14px;color:var(--g6);padding:8px 0;border-bottom:1px solid rgba(255,255,255,.03)">&#10060; Taxes, Benefits, Overhead</li>
-<li style="font-size:14px;color:var(--g6);padding:8px 0;border-bottom:1px solid rgba(255,255,255,.03)">&#10060; Training Time</li>
-<li style="font-size:14px;color:var(--g6);padding:8px 0;border-bottom:1px solid rgba(255,255,255,.03)">&#10060; Turnover Risk</li>
-<li style="font-size:14px;color:var(--g6);padding:8px 0">&#10060; Limited Hours</li>
+<li style="font-size:14px;color:var(--g6);padding:8px 0;border-bottom:1px solid rgba(255,255,255,.03)">$40K&ndash;$50K Salary</li>
+<li style="font-size:14px;color:var(--g6);padding:8px 0;border-bottom:1px solid rgba(255,255,255,.03)">Taxes, Benefits, Overhead</li>
+<li style="font-size:14px;color:var(--g6);padding:8px 0;border-bottom:1px solid rgba(255,255,255,.03)">Training Time</li>
+<li style="font-size:14px;color:var(--g6);padding:8px 0;border-bottom:1px solid rgba(255,255,255,.03)">Turnover Risk</li>
+<li style="font-size:14px;color:var(--g6);padding:8px 0">Limited Hours</li>
 </ul>
-<div style="font-size:14px;font-weight:800;color:var(--g4)">&#128073; TRUE COST: <span style="font-size:28px;font-weight:900;color:var(--mag)">$60K+</span></div>
+<div style="font-size:14px;font-weight:800;color:var(--g4)">TRUE COST: <span style="font-size:28px;font-weight:900;color:var(--mag)">$60K+</span></div>
 </div>
 <div style="padding:40px 32px;border-radius:24px;background:linear-gradient(145deg,rgba(0,255,255,.06),rgba(242,0,255,.04));border:2px solid rgba(0,255,255,.15);position:relative;overflow:hidden;box-shadow:0 16px 60px rgba(0,255,255,.08)">
-<div style="position:absolute;top:12px;right:16px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--cy);font-weight:700">&#9889; Smart Way</div>
+<div style="position:absolute;top:12px;right:16px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--cy);font-weight:700">Smart Way</div>
 <h4 style="font-size:20px;font-weight:900;color:var(--cy);margin-bottom:20px">THE HELLO LLC AI System</h4>
 <ul style="list-style:none;padding:0;margin:0 0 24px">
-<li style="font-size:14px;color:var(--g4);padding:8px 0;border-bottom:1px solid rgba(0,255,255,.06)">&#9989; $8,500 Setup</li>
-<li style="font-size:14px;color:var(--g4);padding:8px 0;border-bottom:1px solid rgba(0,255,255,.06)">&#9989; $1,500/month</li>
-<li style="font-size:14px;color:var(--g4);padding:8px 0;border-bottom:1px solid rgba(0,255,255,.06)">&#9989; 24/7 Operation</li>
-<li style="font-size:14px;color:var(--g4);padding:8px 0">&#9989; No overhead, no risk</li>
+<li style="font-size:14px;color:var(--g4);padding:8px 0;border-bottom:1px solid rgba(0,255,255,.06)">$8,500 Setup</li>
+<li style="font-size:14px;color:var(--g4);padding:8px 0;border-bottom:1px solid rgba(0,255,255,.06)">$1,500/month</li>
+<li style="font-size:14px;color:var(--g4);padding:8px 0;border-bottom:1px solid rgba(0,255,255,.06)">24/7 Operation</li>
+<li style="font-size:14px;color:var(--g4);padding:8px 0">No overhead, no risk</li>
 </ul>
-<div style="font-size:14px;font-weight:800;color:var(--cy)">&#128073; YEAR 1: <span style="font-size:24px;font-weight:900">$26,500</span></div>
-<div style="font-size:14px;font-weight:800;color:var(--yel);margin-top:4px">&#128073; YEAR 2+: <span style="font-size:24px;font-weight:900">$18,000</span></div>
+<div style="font-size:14px;font-weight:800;color:var(--cy)">YEAR 1: <span style="font-size:24px;font-weight:900">$26,500</span></div>
+<div style="font-size:14px;font-weight:800;color:var(--yel);margin-top:4px">YEAR 2+: <span style="font-size:24px;font-weight:900">$18,000</span></div>
 </div>
 </div>
 
 <!-- POWER STATEMENT -->
 <div style="margin-top:48px;text-align:center;padding:40px 20px">
 <p style="font-size:clamp(20px,3vw,32px);font-weight:900;line-height:1.3;max-width:700px;margin:0 auto">
-<span style="color:var(--cy)">&ldquo;You&rsquo;re not replacing an employee&hellip;</span><br>
-<span style="color:var(--cy)">You&rsquo;re upgrading your entire operational system.&rdquo;</span>
+<span style="color:#ffffff">&ldquo;You&rsquo;re not replacing an employee&hellip;</span><br>
+<span style="color:var(--mag)">You&rsquo;re upgrading your entire operational system.&rdquo;</span>
 </p>
 </div>
 
@@ -571,6 +553,22 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 <h2 class="sh split-h" style="font-size:clamp(28px,5vw,48px)">Where Are You Headed?</h2>
 <p style="color:var(--g4);font-size:15px;max-width:500px;margin:0 auto 48px">Find exactly what you need. Pick your track and let&rsquo;s build something incredible.</p>
 
+<!-- SVG PATHS FOR DRAW-A-PATH EFFECT -->
+<div style="position:relative;max-width:1000px;margin:0 auto 20px;height:120px">
+<svg class="wf-path-svg" viewBox="0 0 1000 120" style="width:100%;height:120px;overflow:visible" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path class="wf-draw-path wf-path-1" d="M80 100 C200 20, 350 20, 500 60 S800 100, 920 40" stroke="url(#wf-grad-1)" stroke-width="3" stroke-linecap="round" fill="none"/>
+<path class="wf-draw-path wf-path-2" d="M80 60 C250 110, 400 10, 500 60 S750 110, 920 80" stroke="url(#wf-grad-2)" stroke-width="3" stroke-linecap="round" fill="none"/>
+<path class="wf-draw-path wf-path-3" d="M80 40 C180 100, 380 100, 500 50 S820 0, 920 60" stroke="url(#wf-grad-3)" stroke-width="3" stroke-linecap="round" fill="none"/>
+<defs>
+<linearGradient id="wf-grad-1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#00ffff"/><stop offset="100%" stop-color="#f200ff"/></linearGradient>
+<linearGradient id="wf-grad-2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f200ff"/><stop offset="100%" stop-color="#f2ff00"/></linearGradient>
+<linearGradient id="wf-grad-3" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f2ff00"/><stop offset="100%" stop-color="#00ffff"/></linearGradient>
+</defs>
+<circle class="wf-dot wf-dot-1" r="8" fill="#00ffff" filter="drop-shadow(0 0 6px rgba(0,255,255,.6))"/>
+<circle class="wf-dot wf-dot-2" r="8" fill="#f200ff" filter="drop-shadow(0 0 6px rgba(242,0,255,.6))"/>
+<circle class="wf-dot wf-dot-3" r="8" fill="#f2ff00" filter="drop-shadow(0 0 6px rgba(242,255,0,.6))"/>
+</svg>
+</div>
 <div class="wayfinder-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1000px;margin:0 auto;position:relative;z-index:2">
 
 <!-- Companies Card -->
@@ -620,7 +618,7 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 <div style="margin-bottom:20px"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfce5c9bd1396582f7ac05.png" alt="The Hello Plaza" style="width:120px;height:120px;object-fit:contain;border-radius:16px"></div>
 <h3 style="font-size:24px;font-weight:900;color:var(--cy);margin-bottom:8px">The Hello Plaza</h3>
 <p style="font-size:14px;color:var(--g4);line-height:1.6;margin-bottom:8px">Step into our immersive Metaverse experience. No VR headset needed &mdash; just click and explore.</p>
-<p style="font-size:12px;color:var(--mag);margin-bottom:20px;font-weight:600">&#9889; Browser-Based &bull; Instant Access</p>
+<p style="font-size:12px;color:var(--mag);margin-bottom:20px;font-weight:600">Browser-Based &bull; Instant Access</p>
 <a href="https://thehello.llc/VISITHELLOPLAZA" target="_blank" style="display:inline-block;padding:14px 32px;border-radius:50px;background:linear-gradient(135deg,var(--mag),#c000cc);color:#fff;font-size:14px;font-weight:800;letter-spacing:1px;text-transform:uppercase;box-shadow:0 4px 24px rgba(242,0,255,.25);transition:all .25s">Visit Hello Plaza</a>
 </div>
 
@@ -748,7 +746,7 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 
 <div class="faq-card" style="margin-bottom:16px;border-radius:20px;background:linear-gradient(160deg,rgba(242,255,0,.05),rgba(0,255,255,.03));border:1px solid rgba(242,255,0,.1);overflow:hidden;transition:all .4s">
 <div class="faq-q-new" onclick="this.parentElement.classList.toggle('faq-open')" style="padding:28px 32px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px">
-<h3 style="font-size:clamp(16px,2.5vw,20px);font-weight:800;color:#fff;margin:0;line-height:1.3">&#9889; How fast can my system be implemented?</h3>
+<h3 style="font-size:clamp(16px,2.5vw,20px);font-weight:800;color:#fff;margin:0;line-height:1.3">How fast can my system be implemented?</h3>
 <div class="faq-toggle" style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--yel),var(--cy));display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:var(--dk);flex-shrink:0;transition:transform .3s">+</div>
 </div>
 <div class="faq-a-new" style="max-height:0;overflow:hidden;transition:max-height .5s ease">
@@ -835,13 +833,13 @@ nav{padding:0 16px;}.nm{display:none;}.nav-btns{display:none;}
 <p style="font-size:clamp(20px,3vw,28px);letter-spacing:8px;text-transform:uppercase;color:var(--cy);font-weight:900;margin-bottom:16px">Follow Us</p>
 <p style="font-size:16px;color:var(--g4);margin-bottom:40px">Stay connected across all platforms</p>
 <div class="social-dock" style="display:flex;gap:32px;justify-content:center;flex-wrap:wrap;align-items:flex-end;perspective:800px">
-<a href="https://www.facebook.com/groups/990175411646319?ref=share" target="_blank" class="social-icon-link" style="width:100px;height:100px;border-radius:24px;background:rgba(0,255,255,.06);border:1px solid rgba(0,255,255,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="Facebook"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f3b3a58226ad1a00c.png" alt="Facebook" style="width:100%;height:100%;object-fit:contain"></a>
-<a href="https://www.instagram.com/thehellollc/" target="_blank" class="social-icon-link" style="width:100px;height:100px;border-radius:24px;background:rgba(242,0,255,.06);border:1px solid rgba(242,0,255,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="Instagram"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f9bd13948ebf86541.png" alt="Instagram" style="width:100%;height:100%;object-fit:contain"></a>
-<a href="https://www.youtube.com/channel/UCZ9qeSXP75tcE7maB50Q97w" target="_blank" class="social-icon-link" style="width:100px;height:100px;border-radius:24px;background:rgba(242,0,255,.06);border:1px solid rgba(242,0,255,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="YouTube"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f9bd139152df86542.png" alt="YouTube" style="width:100%;height:100%;object-fit:contain"></a>
-<a href="https://tiktok.com/@hellollc" target="_blank" class="social-icon-link" style="width:100px;height:100px;border-radius:24px;background:rgba(242,255,0,.06);border:1px solid rgba(242,255,0,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="TikTok"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f83f1a11215401356.png" alt="TikTok" style="width:100%;height:100%;object-fit:contain"></a>
-<a href="https://www.linkedin.com/company/hellollc" target="_blank" class="social-icon-link" style="width:100px;height:100px;border-radius:24px;background:rgba(0,255,255,.06);border:1px solid rgba(0,255,255,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="LinkedIn"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f18f77c9954c1748a.png" alt="LinkedIn" style="width:100%;height:100%;object-fit:contain"></a>
-<a href="https://www.threads.net/@thehellollc" target="_blank" class="social-icon-link" style="width:100px;height:100px;border-radius:24px;background:rgba(0,255,255,.06);border:1px solid rgba(0,255,255,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="Threads"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f3b3a5822b8d1a00d.png" alt="Threads" style="width:100%;height:100%;object-fit:contain"></a>
-<a href="https://twitter.com/llc_hello" target="_blank" class="social-icon-link" style="width:100px;height:100px;border-radius:24px;background:rgba(242,255,0,.06);border:1px solid rgba(242,255,0,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="X (Twitter)"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd9369bd1391abdf871ef.png" alt="X" style="width:100%;height:100%;object-fit:contain"></a>
+<a href="https://www.facebook.com/groups/990175411646319?ref=share" target="_blank" class="social-icon-link" style="width:150px;height:150px;border-radius:28px;background:rgba(0,255,255,.06);border:1px solid rgba(0,255,255,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="Facebook"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f3b3a58226ad1a00c.png" alt="Facebook" style="width:100%;height:100%;object-fit:contain"></a>
+<a href="https://www.instagram.com/thehellollc/" target="_blank" class="social-icon-link" style="width:150px;height:150px;border-radius:28px;background:rgba(242,0,255,.06);border:1px solid rgba(242,0,255,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="Instagram"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f9bd13948ebf86541.png" alt="Instagram" style="width:100%;height:100%;object-fit:contain"></a>
+<a href="https://www.youtube.com/channel/UCZ9qeSXP75tcE7maB50Q97w" target="_blank" class="social-icon-link" style="width:150px;height:150px;border-radius:28px;background:rgba(242,0,255,.06);border:1px solid rgba(242,0,255,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="YouTube"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f9bd139152df86542.png" alt="YouTube" style="width:100%;height:100%;object-fit:contain"></a>
+<a href="https://tiktok.com/@hellollc" target="_blank" class="social-icon-link" style="width:150px;height:150px;border-radius:28px;background:rgba(242,255,0,.06);border:1px solid rgba(242,255,0,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="TikTok"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f83f1a11215401356.png" alt="TikTok" style="width:100%;height:100%;object-fit:contain"></a>
+<a href="https://www.linkedin.com/company/hellollc" target="_blank" class="social-icon-link" style="width:150px;height:150px;border-radius:28px;background:rgba(0,255,255,.06);border:1px solid rgba(0,255,255,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="LinkedIn"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f18f77c9954c1748a.png" alt="LinkedIn" style="width:100%;height:100%;object-fit:contain"></a>
+<a href="https://www.threads.net/@thehellollc" target="_blank" class="social-icon-link" style="width:150px;height:150px;border-radius:28px;background:rgba(0,255,255,.06);border:1px solid rgba(0,255,255,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="Threads"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd88f3b3a5822b8d1a00d.png" alt="Threads" style="width:100%;height:100%;object-fit:contain"></a>
+<a href="https://twitter.com/llc_hello" target="_blank" class="social-icon-link" style="width:150px;height:150px;border-radius:28px;background:rgba(242,255,0,.06);border:1px solid rgba(242,255,0,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;padding:14px" title="X (Twitter)"><img src="https://assets.cdn.filesafe.space/2E1eLwbC6YxNkjeUbu8M/media/69bfd9369bd1391abdf871ef.png" alt="X" style="width:100%;height:100%;object-fit:contain"></a>
 </div>
 </div>
 
@@ -1073,6 +1071,35 @@ track.addEventListener('mouseleave',function(){gsap.globalTimeline.resume();});
 }
 })();
 
+// ========== GSAP FLIP FLEXBOX FILTERING - METRICS ==========
+(function(){
+var container=document.querySelector('.metrics-flex-container');
+var buttons=document.querySelectorAll('.mf-btn');
+var cards=document.querySelectorAll('.mf-card');
+if(!container||!buttons.length)return;
+buttons.forEach(function(btn){
+btn.addEventListener('click',function(){
+var filter=this.getAttribute('data-filter');
+buttons.forEach(function(b){b.classList.remove('active');b.style.background='transparent';});
+this.classList.add('active');
+if(filter==='all')this.style.background='var(--cy)';
+else if(filter==='savings')this.style.background='var(--cy)';
+else if(filter==='performance')this.style.background='var(--mag)';
+else if(filter==='reliability')this.style.background='var(--yel)';
+this.style.color=filter==='performance'?'#fff':'var(--dk)';
+var state=Flip.getState(cards);
+cards.forEach(function(card){
+if(filter==='all'||card.getAttribute('data-category')===filter){
+card.style.display='';
+}else{
+card.style.display='none';
+}
+});
+Flip.from(state,{duration:0.6,ease:'power1.inOut',stagger:0.05,absolute:true,onEnter:function(elements){return gsap.fromTo(elements,{opacity:0,scale:0.8},{opacity:1,scale:1,duration:0.4});},onLeave:function(elements){return gsap.to(elements,{opacity:0,scale:0.8,duration:0.3});}});
+});
+});
+})();
+
 // ========== HORIZONTAL SCROLLING GALLERY (WHAT WE BUILD) ==========
 (function(){
 var wrap=document.querySelector('.horizontal-scroll-wrap');
@@ -1188,6 +1215,34 @@ gsap.to(track,{x:'-50%',duration:25,ease:'none',repeat:-1});
 var section=document.querySelector('.wayfinder-section');
 if(!section)return;
 ScrollTrigger.create({trigger:section,start:'top top',end:'+=300',pin:true,pinSpacing:true});
+})();
+
+// ========== DRAW-A-PATH + TOGGLE DIRECTION - Wayfinder emojis ==========
+(function(){
+gsap.registerPlugin(MotionPathPlugin);
+var paths=document.querySelectorAll('.wf-draw-path');
+var dots=[document.querySelector('.wf-dot-1'),document.querySelector('.wf-dot-2'),document.querySelector('.wf-dot-3')];
+if(!paths.length||!dots[0])return;
+var forward=[true,true,true];
+// Draw SVG paths on scroll
+paths.forEach(function(path,i){
+var len=path.getTotalLength();
+path.style.strokeDasharray=len;
+path.style.strokeDashoffset=len;
+gsap.to(path,{strokeDashoffset:0,duration:1.5,delay:i*0.3,ease:'power2.inOut',scrollTrigger:{trigger:'.wayfinder-section',start:'top 80%',toggleActions:'play none none reverse'}});
+});
+// Animate dots along paths with toggle direction on click
+dots.forEach(function(dot,i){
+if(!dot||!paths[i])return;
+var tl=gsap.timeline({repeat:-1,yoyo:true,delay:i*0.4});
+tl.to(dot,{motionPath:{path:paths[i],align:paths[i],alignOrigin:[0.5,0.5]},duration:3+i*0.5,ease:'power1.inOut'});
+// Toggle direction on click
+dot.style.cursor='pointer';
+dot.addEventListener('click',function(){
+forward[i]=!forward[i];
+if(forward[i]){tl.play();}else{tl.reverse();}
+});
+});
 })();
 
 // ========== FOOTER BOUNCE EFFECT ==========
